@@ -2,7 +2,6 @@ package models;
 
 public class Produit {
 
-
     String id;
     String nom;
     String description;

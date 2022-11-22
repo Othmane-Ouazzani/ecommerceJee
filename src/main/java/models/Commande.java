@@ -6,7 +6,6 @@ public class Commande {
     Client client;
     String date;
 
-
     public Commande(int num, Client client, String date) {
         this.num = num;
         this.client = client;

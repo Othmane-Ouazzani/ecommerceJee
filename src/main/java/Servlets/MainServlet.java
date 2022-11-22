@@ -17,20 +17,36 @@ public class MainServlet extends HttpServlet {
     ProduitManager pm=new ProduitManager();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String whichPage = "";
 
-        try {
-            whichPage = request.getParameter("page");
-        }catch(Exception e) {
-            whichPage = "";
-        }
-        if(whichPage != null)
-            switch(whichPage) {
-                case "register": {request.getRequestDispatcher("register.jsp").forward(request, response); break;}
-                case "": {request.getRequestDispatcher("login.jsp").forward(request, response); break;}
+        ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
+        request.setAttribute("listeProduit",listeProduit);
+
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+
+            String whichPage = "";
+
+            try {
+                whichPage = request.getParameter("page");
+            } catch (Exception e) {
+                whichPage = "";
             }
-        else
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            if (whichPage != null)
+                switch (whichPage) {
+                    case "register": {
+                        request.getRequestDispatcher("register.jsp").forward(request, response);
+                        break;
+                    }
+                    case "": {
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                        break;
+                    }
+                }
+            else
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -73,10 +89,6 @@ public class MainServlet extends HttpServlet {
         String password = request.getParameter("password");
         Client client = cm.getClient(email);
         if(client != null && client.getPassword().equals(password)) {
-            ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
-
-            for(Produit p:listeProduit){System.err.println(p.getId());}
-            request.setAttribute("listeProduit",listeProduit);
             HttpSession userSession = request.getSession();
             userSession.setAttribute("client", client);
             request.getRequestDispatcher("home.jsp").forward(request, response);

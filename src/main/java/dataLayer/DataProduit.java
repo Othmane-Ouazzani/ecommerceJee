@@ -97,7 +97,6 @@ public class DataProduit implements businessLayer.interfaceProduit {
             connexion.Connect();
             Statement st = connexion.getCnx().createStatement();
             isUpdated=st.executeUpdate("UPDATE produit set id = '"+p.getId()+"',nom = '"+p.getNom()+"',description = '"+p.getDescription()+"',qte = '"+p.getQte()+"',prix = '"+p.getPrix()+"',categorie = '"+p.getCategorie()+"',image = '"+p.getImage()+"',     WHERE login ='"+oldId+"';");
-
         }catch(SQLException e){e.printStackTrace();}
 
         return  isUpdated;
