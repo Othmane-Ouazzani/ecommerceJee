@@ -37,4 +37,6 @@
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <!-- END: Custom CSS-->
 
+  <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/tables/datatable/datatables.min.css">
+
 </head>

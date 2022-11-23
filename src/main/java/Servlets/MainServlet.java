@@ -21,9 +21,6 @@ public class MainServlet extends HttpServlet {
         ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
         request.setAttribute("listeProduit",listeProduit);
 
-        HttpSession session = request.getSession(false);
-        if(session == null) {
-
             String whichPage = "";
 
             try {
@@ -44,9 +41,7 @@ public class MainServlet extends HttpServlet {
                 }
             else
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
+
     }
 
     @Override
@@ -89,6 +84,10 @@ public class MainServlet extends HttpServlet {
         String password = request.getParameter("password");
         Client client = cm.getClient(email);
         if(client != null && client.getPassword().equals(password)) {
+
+            ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
+            request.setAttribute("listeProduit",listeProduit);
+
             HttpSession userSession = request.getSession();
             userSession.setAttribute("client", client);
             request.getRequestDispatcher("home.jsp").forward(request, response);
