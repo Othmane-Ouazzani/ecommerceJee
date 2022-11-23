@@ -41,8 +41,8 @@ public class DataProduit implements businessLayer.interfaceProduit {
             connexion.Deconnexion();
             while(rs.next()){
                 listProduits.add(new Produit(rs.getString(1),rs.getString(2),rs.getString(3),parseInt(rs.getString(4)),parseFloat(rs.getString(5)),rs.getString(6),rs.getString(7)));
-//                listProduits.add(new Produit(rs.getString("id"),rs.getString("nom"),rs.getString("description"),parseInt(rs.getString("qte")),parseFloat(rs.getString("prix")),rs.getString("categorie"),rs.getString("image")));
-            } }catch (SQLException e){e.printStackTrace();}
+            }
+        }catch (SQLException e){e.printStackTrace();}
 
         return listProduits;
 
@@ -101,7 +101,5 @@ public class DataProduit implements businessLayer.interfaceProduit {
 
         return  isUpdated;
     }
-
-
 
 }
