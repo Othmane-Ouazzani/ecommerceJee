@@ -42,6 +42,13 @@
 
 <script src="app-assets/js/scripts/datatables/datatable.js"></script>
 
+<script src="app-assets/vendors/js/extensions/dropzone.min.js"></script>
+<script src="app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+<script src="app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+<script src="app-assets/js/scripts/ui/data-list-view.js"></script>
+
+
+
 
 
 
