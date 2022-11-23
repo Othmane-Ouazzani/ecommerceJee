@@ -39,5 +39,29 @@
 <script src="app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
 <script src="app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
 <script src="app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
-<
+
 <script src="app-assets/js/scripts/datatables/datatable.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
