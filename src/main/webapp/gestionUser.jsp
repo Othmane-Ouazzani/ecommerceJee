@@ -127,7 +127,49 @@
                                     <p class="card-text">All of the data export buttons have a exportOptions option which can be used to specify information about what data should be exported and how. The options given for this parameter are passed directly to the buttons.exportData() method to obtain the required data.
                                     </p>
                                     <p>
-                                        The print button will open a new window in the end user's browser and, by default, automatically trigger the print function allowing the end user to print the table. The window will be closed once the print is complete, or has been cancelled.
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#inlineForm">
+                                            + Add New User
+                                        </button>
+
+                                        <!-- Modal -->
+                                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel33">Add User form</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="#">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="First Name" name="fname" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Last Name" name="lname" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" placeholder="Email" name="email" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" placeholder="Phone number" name="num" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" name="password" placeholder="Password" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" placeholder="Confirm password" name="cpassword" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Add User</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table table-striped dataex-html5-selectors">

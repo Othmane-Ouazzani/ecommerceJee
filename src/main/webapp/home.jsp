@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:if test="${ sessionScope.client == null}">
-    <c:redirect url="/index" />
+    <c:redirect url="/index"/>
 </c:if>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -16,7 +16,8 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
+<body class="vertical-layout vertical-menu-modern content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="click"
+      data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
 
 <!-- BEGIN: Header-->
 <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
@@ -25,21 +26,28 @@
             <div class="navbar-collapse" id="navbar-mobile">
                 <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
+                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav bookmark-icons">
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-toggle="tooltip" data-placement="top" title="Todo"><i class="ficon feather icon-check-square"></i></a></li>
-                        </ul>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-toggle="tooltip" data-placement="top" title="Todo"><i
+                                class="ficon feather icon-check-square"></i></a></li>
+                    </ul>
 
                 </div>
                 <ul class="nav navbar-nav float-right">
 
                     <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600"><c:out value="${client.nom} ${client.prenom}"/></span><span class="user-status">Available</span></div><span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600"><c:out value="${client.nom} ${client.prenom}"/></span><span
+                                class="user-status">Available</span></div>
+                        <span><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                     </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a
+                                class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i
+                                class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -54,25 +62,35 @@
     </a></li>
 </ul>
 <!-- END: Header-->
-<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded" data-scroll-to-active="true" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded" data-scroll-to-active="true"
+     style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="navbar-header expanded">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
                 <div class="brand-logo"></div>
                 <h2 class="brand-text mb-0">Vuexy</h2>
-            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                    class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
+                    class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
 
             </a></li>
         </ul>
     </div>
-<!--    <a href="index.html"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>-->
+    <!--    <a href="index.html"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>-->
     <div class="shadow-bottom"></div>
     <div class="main-menu-content ps ps--active-y">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="nav-item"><a href="home.jsp"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+            <li class="nav-item"><a href="home.jsp"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span
+                    class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
             </li>
         </ul>
-        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 218px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 17px;"></div></div></div>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; height: 218px; right: 0px;">
+            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 17px;"></div>
+        </div>
+    </div>
 </div>
 <!-- BEGIN: Main Menu-->
 <!-- END: Main Menu-->
@@ -163,58 +181,59 @@
                 <!-- Ecommerce Products Starts -->
                 <section id="ecommerce-products" class="grid-view">
                     <c:forEach var="produit" items="${listeProduit}">
-                    <div class="card ecommerce-card">
-                        <div class="card-content">
-                            <div class="item-img text-center">
-                                <a href="app-ecommerce-details.html">
-                                    <img class="img-fluid" src="${produit.image}"   alt="img-placeholder"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="item-wrapper">
-                                    <div class="item-rating">
-                                        <div class="badge badge-primary badge-md">
-                                            <span>4</span> <i class="feather icon-star"></i>
+                        <div class="card ecommerce-card">
+                            <div class="card-content">
+                                <div class="item-img text-center">
+                                    <a href="app-ecommerce-details.html">
+                                        <img class="img-fluid" src="${produit.image}" alt="img-placeholder"></a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="item-wrapper">
+                                        <div class="item-rating">
+                                            <div class="badge badge-primary badge-md">
+                                                <span>4</span> <i class="feather icon-star"></i>
+                                            </div>
                                         </div>
+                                        <div>
+                                            <h6 class="item-price">
+                                                    ${produit.prix}$
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="item-name">
+                                        <a href="app-ecommerce-details.html"><c:out value="${produit.nom}"/></a>
+
                                     </div>
                                     <div>
-                                        <h6 class="item-price">
-                                            ${produit.prix}$
-                                        </h6>
+                                        <p class="item-description">
+                                            <c:out value="${produit.description}"/>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="item-name">
-                                    <a href="app-ecommerce-details.html"><c:out value="${produit.nom}"/></a>
+                                <div class="item-options text-center">
+                                    <div class="item-wrapper">
+                                        <div class="item-rating">
+                                            <div class="badge badge-primary badge-md">
+                                                <span>4</span> <i class="feather icon-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="item-cost">
+                                            <h6 class="item-price">
+                                                $<c:out value="${produit.prix}"/>
 
-                                </div>
-                                <div>
-                                    <p class="item-description">
-                                       <c:out value="${produit.description}"/>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item-options text-center">
-                                <div class="item-wrapper">
-                                    <div class="item-rating">
-                                        <div class="badge badge-primary badge-md">
-                                            <span>4</span> <i class="feather icon-star"></i>
+                                            </h6>
                                         </div>
                                     </div>
-                                    <div class="item-cost">
-                                        <h6 class="item-price">
-                                            $<c:out value="${produit.prix}"/>
-
-                                        </h6>
+                                    <div class="wishlist">
+                                        <i class="fa fa-heart-o"></i> <span>Wishlist</span>
                                     </div>
-                                </div>
-                                <div class="wishlist">
-                                    <i class="fa fa-heart-o"></i> <span>Wishlist</span>
-                                </div>
-                                <div class="cart">
-                                    <i class="feather icon-shopping-cart"></i> <span class="add-to-cart">Add to cart</span> <a href="app-ecommerce-checkout.html" class="view-in-cart d-none">View In Cart</a>
+                                    <div class="cart">
+                                        <i class="feather icon-shopping-cart"></i> <span class="add-to-cart">Add to cart</span> <a href="app-ecommerce-checkout.html"
+                                                                                                                                   class="view-in-cart d-none">View In Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
                     </c:forEach>
                 </section>
