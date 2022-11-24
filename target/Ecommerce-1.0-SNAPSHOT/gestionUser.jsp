@@ -112,13 +112,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Column selectors with Export and Print Optionssssssssss</h4>
-                            </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
-                                    <p class="card-text">All of the data export buttons have a exportOptions option which can be used to specify information about what data should be exported and how. The options given for this parameter are passed directly to the buttons.exportData() method to obtain the required data.
-                                    </p>
                                     <p>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#inlineForm">
@@ -135,7 +130,8 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="#">
+                                                <form action="index" method="post">
+                                                    <input type="hidden" name="type" value="addUser">
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <input type="text" placeholder="First Name" name="fname" class="form-control">
@@ -157,7 +153,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Add User</button>
+                                                        <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Add User">
                                                     </div>
                                                 </form>
                                             </div>
@@ -176,13 +172,15 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>Tiger</td>
-                                                <td>Nixon</td>
-                                                <td>NixonT@gmail.com</td>
-                                                <td>0622345111</td>
-                                                <td>Anas1234</td>
-                                            </tr>
+                                            <c:forEach items="${listeClient}" var="client">
+                                                <tr>
+                                                    <td>${client.nom}</td>
+                                                    <td>${client.prenom}</td>
+                                                    <td>${client.login}</td>
+                                                    <td>${client.tel}</td>
+                                                    <td>${client.password}</td>
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                             <tfoot>
                                             <tr>

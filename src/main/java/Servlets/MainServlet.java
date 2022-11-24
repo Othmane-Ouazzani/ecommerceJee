@@ -62,6 +62,7 @@ public class MainServlet extends HttpServlet {
         switch (type){
             case "register":register(request,response);break;
             case "login":login(request,response);break;
+            case "addUser":addUser(request, response);break;
             default:
         }
     }
@@ -108,4 +109,28 @@ public class MainServlet extends HttpServlet {
         }
 
     }
+
+    private void addUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("im in add user ");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String cpassword = request.getParameter("cpassword");
+        String nom = request.getParameter("lname");
+        String prenom = request.getParameter("fname");
+        String num = request.getParameter("num");
+        if (cm.isClientExist(email)==0) {
+            System.out.println("doesnt exist");
+            if (password.equals(cpassword) && cm.getClient(email) == null) {
+                System.out.println("not null");
+                Client client = new Client(email, password, nom, prenom, num);
+                cm.addClient(client);
+                request.setAttribute("userAdded","Successful registration");
+                request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+            }
+        }else{
+            request.setAttribute("failedAdding","Email already exists!");
+            request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+        }
+    }
+
 }
