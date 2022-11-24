@@ -97,7 +97,7 @@ public class MainServlet extends HttpServlet {
         Client client = cm.getClient(email);
         if(client != null && client.getPassword().equals(password)) {
 
-            ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
+            ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
 
             HttpSession userSession = request.getSession();
