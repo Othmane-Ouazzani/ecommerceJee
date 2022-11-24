@@ -246,12 +246,6 @@
 <!-- END: Body-->
 
 <script>
-    function deleteClient(id) {
-        confirm()
-        document.getElementById("clientIdDelete").innerHTML = id;
-    }
-</script>
-<script>
     $(".deleteUserButton").on("click", function() {
         let email = $(this).attr("id");
         console.log(email)

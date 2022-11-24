@@ -139,8 +139,6 @@ public class MainServlet extends HttpServlet {
 
     private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         cm.deleteClient(request.getParameter("clientEmail"));
-        ArrayList<Produit> listeProduit = pm.getAllProduits();
-        request.setAttribute("listeProduit",listeProduit);
 
         ArrayList<Client> listeClient = cm.getAllClients();
         request.setAttribute("listeClient",listeClient);
