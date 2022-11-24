@@ -26,6 +26,11 @@ public class ProduitManager implements  interfaceProduit{
     }
 
     @Override
+    public int isProduitExist(String id) {
+        return dp.isProduitExist(id);
+    }
+
+    @Override
     public int insertProduit(Produit produit) {
         return dp.insertProduit(produit);
     }
