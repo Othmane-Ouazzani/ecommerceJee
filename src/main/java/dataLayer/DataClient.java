@@ -74,7 +74,7 @@ public class DataClient {
         try {
             connexion.Connect();
             Statement st = connexion.getCnx().createStatement();
-            isDeleted=st.executeUpdate("DELETE FROM client WHERE login ='"+email+"';");
+            isDeleted=st.executeUpdate("DELETE FROM client WHERE login ='"+email+"'");
 
         }catch(SQLException e){e.printStackTrace();}
 

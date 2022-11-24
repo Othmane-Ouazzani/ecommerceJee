@@ -11,6 +11,10 @@ import models.Produit;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseUnsignedInt;
+
 @WebServlet(name = "Servlet", value = {"/index"})
 public class MainServlet extends HttpServlet {
     ClientManager cm=new ClientManager();
@@ -29,6 +33,7 @@ public class MainServlet extends HttpServlet {
             try {
                 whichPage = request.getParameter("page");
             } catch (Exception e) {
+                System.out.println("Errrrror  ********************************************* ");
                 whichPage = "";
             }
             if (whichPage != null)
@@ -63,10 +68,11 @@ public class MainServlet extends HttpServlet {
             case "register":register(request,response);break;
             case "login":login(request,response);break;
             case "addUser":addUser(request, response);break;
+            case "deleteClient":deleteClient(request,response);break;
+            case "addProduit":addProduit(request, response);break;
             default:
         }
     }
-
 
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -119,9 +125,7 @@ public class MainServlet extends HttpServlet {
         String prenom = request.getParameter("fname");
         String num = request.getParameter("num");
         if (cm.isClientExist(email)==0) {
-            System.out.println("doesnt exist");
             if (password.equals(cpassword) && cm.getClient(email) == null) {
-                System.out.println("not null");
                 Client client = new Client(email, password, nom, prenom, num);
                 cm.addClient(client);
                 request.setAttribute("userAdded","Successful registration");
@@ -130,6 +134,40 @@ public class MainServlet extends HttpServlet {
         }else{
             request.setAttribute("failedAdding","Email already exists!");
             request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+        }
+    }
+
+    private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        cm.deleteClient(request.getParameter("clientEmail"));
+        ArrayList<Produit> listeProduit = pm.getAllProduits();
+        request.setAttribute("listeProduit",listeProduit);
+
+        ArrayList<Client> listeClient = cm.getAllClients();
+        request.setAttribute("listeClient",listeClient);
+        request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+    }
+
+    private void addProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.err.println("Here is addProduit");
+        String id = request.getParameter("pid");
+        String nom = request.getParameter("pnom");
+        String description = request.getParameter("pdescription");
+        String qte = request.getParameter("pqte");
+        String prix = request.getParameter("pprix");
+        String categorie = request.getParameter("pcategorie");
+        String image="images/"+request.getParameter("pimage");
+        if (pm.isProduitExist(id)==0) {
+            System.out.println("doesnt exist");
+
+            System.out.println("not null");
+            Produit produit = new Produit(id, nom, description,parseInt(qte),parseFloat(prix) ,categorie,image);
+            pm.insertProduit(produit);
+            request.setAttribute("produitAdded","Successful product insertion");
+            request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
+
+        }else{
+            request.setAttribute("PfailedAdding","ID already exists!");
+            request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
         }
     }
 

@@ -14,7 +14,7 @@ public class Connexion {
             Class.forName("org.mariadb.jdbc.Driver");
             url = new String("jdbc:mariadb://localhost:3306/ecommerce");
             cnx=DriverManager.getConnection(url,"root","");
-            System.out.println("Connected to database!");
+//            System.out.println("Connected to database!");
 
         }catch(Exception ex){
 

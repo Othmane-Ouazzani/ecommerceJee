@@ -182,7 +182,7 @@
                                                     <td>${client.password}</td>
                                                     <td>
                                                         <span class="action-edit"><i class="feather icon-edit"></i></span>
-                                                        <span class="cursor-pointer" data-toggle="modal" data-target="#danger" onclick="return deleteClient(${client.login})"><i class="feather icon-trash"></i></span>
+                                                        <span class="cursor-pointer deleteUserButton" id="${client.login}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -228,8 +228,11 @@
                 <h1>Are you sure? </h1><p>supprimer le client <span id="clientIdDelete"></span></p>
             </div>
             <div class="modal-footer">
-                <a href=""><button type="button" class="btn btn-danger" data-dismiss="modal">Accept</button></a>
-                <%--                <button type="button" class="btn btn-danger" data-dismiss="modal">Accept</button>--%>
+                <form action="index" method="post">
+                    <input type="hidden" value="deleteClient" name="type">
+                    <input id="inputClientEmail" type="hidden" name="clientEmail">
+                    <button type="submit" class="btn btn-danger">Accept</button>
+                </form>
             </div>
         </div>
     </div>
@@ -247,6 +250,14 @@
         confirm()
         document.getElementById("clientIdDelete").innerHTML = id;
     }
+</script>
+<script>
+    $(".deleteUserButton").on("click", function() {
+        let email = $(this).attr("id");
+        console.log(email)
+        document.getElementById("clientIdDelete").innerHTML = email;
+        document.getElementById("inputClientEmail").setAttribute("value", email);
+    })
 </script>
 
 </html>
