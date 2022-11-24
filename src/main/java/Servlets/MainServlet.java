@@ -33,7 +33,7 @@ public class MainServlet extends HttpServlet {
             try {
                 whichPage = request.getParameter("page");
             } catch (Exception e) {
-                System.out.println("Errrrror  ********************************************* ");
+
                 whichPage = "";
             }
             if (whichPage != null)
@@ -69,6 +69,7 @@ public class MainServlet extends HttpServlet {
             case "login":login(request,response);break;
             case "addUser":addUser(request, response);break;
             case "deleteClient":deleteClient(request,response);break;
+            case "deleteProduit":deleteProduit(request,response);break;
             case "addProduit":addProduit(request, response);break;
             default:
         }
@@ -139,10 +140,16 @@ public class MainServlet extends HttpServlet {
 
     private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         cm.deleteClient(request.getParameter("clientEmail"));
-
         ArrayList<Client> listeClient = cm.getAllClients();
         request.setAttribute("listeClient",listeClient);
         request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+    }
+
+    private void deleteProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        pm.deleteProduit(request.getParameter("produitId"));
+        ArrayList<Produit> listeProduit = pm.getAllProduits();
+        request.setAttribute("listeProduit",listeProduit);
+        request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
     }
 
     private void addProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -161,6 +168,8 @@ public class MainServlet extends HttpServlet {
             Produit produit = new Produit(id, nom, description,parseInt(qte),parseFloat(prix) ,categorie,image);
             pm.insertProduit(produit);
             request.setAttribute("produitAdded","Successful product insertion");
+            ArrayList<Produit> listeProduit = pm.getAllProduits();
+            request.setAttribute("listeProduit",listeProduit);
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
 
         }else{
