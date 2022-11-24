@@ -175,13 +175,13 @@
                                             <tbody>
                                             <c:forEach items="${listeClient}" var="client">
                                                 <tr>
-                                                    <td>${client.nom}</td>
-                                                    <td>${client.prenom}</td>
-                                                    <td>${client.login}</td>
-                                                    <td>${client.tel}</td>
-                                                    <td>${client.password}</td>
+                                                    <td>${client.nom}<span hidden id="enom-${client.login.replace('@', '-').replace('.', '-')}">${client.nom}</span></td>
+                                                    <td>${client.prenom}<span hidden id="eprenom-${client.login.replace('@', '-').replace('.', '-')}">${client.prenom}</span></td>
+                                                    <td>${client.login}<span hidden id="elogin-${client.login.replace('@', '-').replace('.', '-')}">${client.login}</span></td>
+                                                    <td>${client.tel}<span hidden id="etel-${client.login.replace('@', '-').replace('.', '-')}">${client.tel}</span></td>
+                                                    <td>${client.password}<span hidden id="epassword-${client.login.replace('@', '-').replace('.', '-')}">${client.password}</span></td>
                                                     <td>
-                                                        <span class="action-edit"><i class="feather icon-edit"></i></span>
+                                                        <span class="cursor-pointer editClientButton" id="${client.login}" data-toggle="modal" data-target="#editClientModal"><i class="feather icon-edit"></i></span>
                                                         <span class="cursor-pointer deleteUserButton" id="${client.login}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
                                                     </td>
                                                 </tr>
@@ -209,6 +209,48 @@
         </div>
     </div>
 </div>
+
+<%--edit modal begin--%>
+<div class="modal fade text-left" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalEditClient">Add User form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="index" method="post">
+                <input type="hidden" name="type" value="addUser">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" id="enom" placeholder="First Name" name="fname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="eprenom" placeholder="Last Name" name="lname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="eemail" placeholder="Email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="etel" placeholder="Phone number" name="num" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="epassword" name="password" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="ecpassword" placeholder="Confirm password" name="cpassword" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%--edit modal end--%>
+
 <!-- END: Content-->
 
 <div class="sidenav-overlay"></div>
@@ -239,6 +281,7 @@
 </div>
 <%-- are you sure deleting --%>
 
+
 <!-- BEGIN: Footer-->
 <%@include file="includes/footer.jsp" %>
 
@@ -246,11 +289,29 @@
 <!-- END: Body-->
 
 <script>
+    function removeSpecial(myStr) {
+        return myStr.replace('@', '-').replace('.', '-');
+    }
+
     $(".deleteUserButton").on("click", function() {
         let email = $(this).attr("id");
         console.log(email)
         document.getElementById("clientIdDelete").innerHTML = email;
         document.getElementById("inputClientEmail").setAttribute("value", email);
+    })
+    $(".editClientButton").on("click", function() {
+        let email = $(this).attr("id");
+        let nom = $("#enom-" + removeSpecial(email)).text();
+        let prenom = $("#eprenom-" + removeSpecial(email)).text();
+        let tel = $("#etel-" + removeSpecial(email)).text();
+        let password = $("#epassword-" + removeSpecial(email)).text();
+
+        $("#enom").val(nom);
+        $("#eprenom").val(prenom);
+        $("#eemail").val(email);
+        $("#etel").val(tel);
+        $("#epassword").val(password);
+        $("#ecpassword").val(password);
     })
 </script>
 

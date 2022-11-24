@@ -301,6 +301,7 @@
 
 
 </body>
+
 <script>
     $(".deleteProduitButton").on("click", function() {
         let id = $(this).attr("id");

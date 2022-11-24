@@ -152,48 +152,35 @@
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="CATEGORY: activate to sort column ascending"
                                     style="width: 98.5938px;">CATEGORY
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                    aria-label="POPULARITY: activate to sort column ascending" style="width: 86.6406px;">POPULARITY
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                    aria-label="ORDER STATUS: activate to sort column ascending" style="width: 102.656px;">ORDER STATUS
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="QUANTITY: activate to sort column ascending"
+                                    style="width: 71.7969px;">QUANTITY
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="PRICE: activate to sort column ascending"
                                     style="width: 71.7969px;">PRICE
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="ACTION: activate to sort column ascending"
-                                    style="width: 52.5px;">ACTION
+                                    style=" width: 52.5px;">ACTION
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-
+                            <c:forEach items="${listeProduit}" var="produit">
 
                             <tr role="row" class="odd">
                                 <td class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
-                                <td class="product-img sorting_1"><img src="app-assets/images/elements/apple-watch.png" alt="Img placeholder">
+                                <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder">
                                 </td>
-                                <td class="product-name">Apple Watch series 4 GPS</td>
-                                <td class="product-category">Computers</td>
-                                <td>
-                                    <div class="progress progress-bar-success">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="chip chip-warning">
-                                        <div class="chip-body">
-                                            <div class="chip-text">on hold</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="product-price">$69.99</td>
+                                <td class="product-name">${produit.nom}</td>
+                                <td class="product-category">${produit.categorie}</td>
+                                <td class="product-price">${produit.qte}</td>
+                                <td class="product-price">$${produit.prix}</td>
+
                                 <td class="product-action">
                                     <span class="action-edit"><i class="feather icon-edit"></i></span>
-                                    <span class="action-delete"><i class="feather icon-trash"></i></span>
+                                    <span class="cursor-pointer deleteProduitButton" id="${produit.id}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
                                 </td>
                             </tr>
-
+                            </c:forEach>
                             </tbody>
                         </table>
 
@@ -273,6 +260,30 @@
                         </form>
                     </div>
                 </div>
+                <%-- are you sure deleting --%>
+                <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel12" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger white">
+                                <h5 class="modal-title" id="myModalLabel12">Danger</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h1>Are you sure? </h1><p>Supprimer le produit <span id="produitIdDelete"></span></p>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="index" method="post">
+                                    <input type="hidden" value="deleteProduit" name="type">
+                                    <input id="inputProduitId" type="hidden" name="produitId">
+                                    <button type="submit" class="btn btn-danger">Accept</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%-- are you sure deleting --%>
                 <!-- add new sidebar ends -->
             </section>
             <!-- Data list view end -->
@@ -290,6 +301,15 @@
 
 
 </body>
+
+<script>
+    $(".deleteProduitButton").on("click", function() {
+        let id = $(this).attr("id");
+        console.log(id)
+        document.getElementById("produitIdDelete").innerHTML = id;
+        document.getElementById("inputProduitId").setAttribute("value", id);
+    })
+</script>
 <!-- END: Body-->
 
 </html>
