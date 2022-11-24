@@ -102,4 +102,19 @@ public class DataProduit implements businessLayer.interfaceProduit {
         return  isUpdated;
     }
 
+
+    public int isProduitExist(String id) {
+
+        try{
+            connexion.Connect();
+            Statement st=connexion.getCnx().createStatement();
+            ResultSet rs=st.executeQuery("SELECT*  FROM  produit  WHERE  id ='"+id+"';");
+            connexion.Deconnexion();
+            if(rs.next()) return 1;
+        }
+        catch (SQLException e){e.printStackTrace();}
+
+        return 0;
+    }
+
 }

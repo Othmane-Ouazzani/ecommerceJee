@@ -10,7 +10,7 @@ public interface interfaceProduit {
     ArrayList<Produit> getAllProduits();
 
     ArrayList<Produit> getProduitsByCat(String categorie);
-
+    public int isProduitExist(String id);
     int insertProduit(Produit produit);
 
     int deleteProduit(String id);

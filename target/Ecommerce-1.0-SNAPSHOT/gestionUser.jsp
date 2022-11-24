@@ -153,7 +153,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" >Add User</button>
+                                                        <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Add User">
                                                     </div>
                                                 </form>
                                             </div>
@@ -169,7 +169,6 @@
                                                 <th>Email</th>
                                                 <th>Phone Number</th>
                                                 <th>Password</th>
-                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -180,10 +179,6 @@
                                                     <td>${client.login}</td>
                                                     <td>${client.tel}</td>
                                                     <td>${client.password}</td>
-                                                    <td>
-                                                        <span class="action-edit"><i class="feather icon-edit"></i></span>
-                                                        <span class="cursor-pointer" data-toggle="modal" data-target="#danger" onclick="return deleteClient(${client.login})"><i class="feather icon-trash"></i></span>
-                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -214,39 +209,10 @@
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
-<%-- are you sure deleting --%>
-<div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-danger white">
-                <h5 class="modal-title" id="myModalLabel120">Danger</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h1>Are you sure? </h1><p>supprimer le client <span id="clientIdDelete"></span></p>
-            </div>
-            <div class="modal-footer">
-                <a href=""><button type="button" class="btn btn-danger" data-dismiss="modal">Accept</button></a>
-<%--                <button type="button" class="btn btn-danger" data-dismiss="modal">Accept</button>--%>
-            </div>
-        </div>
-    </div>
-</div>
-<%-- are you sure deleting --%>
-
 <!-- BEGIN: Footer-->
 <%@include file="includes/footer.jsp" %>
 
 </body>
 <!-- END: Body-->
-
-<script>
-    function deleteClient(id) {
-        confirm()
-        document.getElementById("clientIdDelete").innerHTML = id;
-    }
-</script>
 
 </html>
