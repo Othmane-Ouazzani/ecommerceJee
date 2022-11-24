@@ -18,8 +18,11 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ArrayList<Produit> listeProduit=listeProduit=pm.getAllProduits();
+        ArrayList<Produit> listeProduit = pm.getAllProduits();
+        ArrayList<Client> listeClient = cm.getAllClients();
+
         request.setAttribute("listeProduit",listeProduit);
+        request.setAttribute("listeClient",listeClient);
 
             String whichPage = "";
 
@@ -32,6 +35,14 @@ public class MainServlet extends HttpServlet {
                 switch (whichPage) {
                     case "register": {
                         request.getRequestDispatcher("register.jsp").forward(request, response);
+                        break;
+                    }
+                    case "gestClient":{
+                        request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+                        break;
+                    }
+                    case "gestProduit":{
+                        request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
                         break;
                     }
                     case "": {
