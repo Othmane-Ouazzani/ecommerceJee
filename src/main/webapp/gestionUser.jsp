@@ -130,7 +130,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="index" method="post">
+                                                <form action="/index" method="post">
                                                     <input type="hidden" name="type" value="addUser">
                                                     <div class="modal-body">
                                                         <div class="form-group">
