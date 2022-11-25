@@ -297,17 +297,30 @@
                                 </button>
                             </div>
                             <form action="index" method="post" class="form form-horizontal">
+                                <input hidden name="type" value="editProduit">
+                                <input hidden name="oldpid" id="moldpid" >
                             <div class="modal-body">
 
                                     <div class="form-body">
                                         <div class="row">
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>ID Produit</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="mpid" class="form-control" name="pid" placeholder="Product Name">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group row">
                                                     <div class="col-md-4">
                                                         <span>Nom</span>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" id="mpnom" class="form-control" name="pname" placeholder="Product Name">
+                                                        <input type="text" id="mpnom" class="form-control" name="pnom" placeholder="Product Name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -327,7 +340,7 @@
                                                         <span>Quantité</span>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="number" id="mpqte" class="form-control" name="pqqte" placeholder="Quantity">
+                                                        <input type="number" id="mpqte" class="form-control" name="pqte" placeholder="Quantity">
                                                     </div>
                                                 </div>
                                             </div>
@@ -372,7 +385,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Edit</button>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" >Edit</button>
 
                             </div>
                             </form>
@@ -416,12 +429,12 @@
         let prix = $("#pprice-"+id).text();
         let qte = $("#pqte-"+id).text();
         let des = $("#pdes-"+id).text();
-
+        $("#moldpid").val(id);
         $("#mpnom").val(nom);
         $("#mpdes").val(des);
         $("#mpprix").val(prix);
         $("#mpqte").val(qte);
-
+        $("#mpid").val(id);
         $("#pcat").find("option").each( function() {
             var $this = $(this);
             if ($this.text() == categorie) {

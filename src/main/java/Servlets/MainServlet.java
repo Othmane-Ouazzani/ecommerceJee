@@ -72,6 +72,7 @@ public class MainServlet extends HttpServlet {
             case "deleteClient":deleteClient(request,response);break;
             case "deleteProduit":deleteProduit(request,response);break;
             case "addProduit":addProduit(request, response);break;
+            case "editProduit":editProduit(request, response);break;
             default:
         }
     }
@@ -175,6 +176,30 @@ public class MainServlet extends HttpServlet {
 
         }else{
             request.setAttribute("PfailedAdding","ID already exists!");
+            request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
+        }
+    }
+    private void editProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String oldId = request.getParameter("oldpid");
+        String id = request.getParameter("pid");
+        String nom = request.getParameter("pnom");
+        String description = request.getParameter("pdes");
+        String qte = request.getParameter("pqte");
+        String prix = request.getParameter("pprix");
+        String categorie = request.getParameter("pcat");
+        String image="images/"+request.getParameter("pimage");
+        if (pm.isProduitExist(id)==0 || oldId.equals(id)){
+            System.out.println("doesnt exist");
+            System.out.println(oldId+prix + "  " + qte+id);
+            Produit produit = new Produit(id, nom, description,parseInt(qte),parseFloat(prix),categorie,image);
+            System.err.println(pm.updateProduit(produit,oldId));
+            request.setAttribute("produitUpdated","Successful product update");
+            ArrayList<Produit> listeProduit = pm.getAllProduits();
+            request.setAttribute("listeProduit",listeProduit);
+            request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
+
+        }else{
+            request.setAttribute("PfailedEditing","ID already exists!");
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
         }
     }
