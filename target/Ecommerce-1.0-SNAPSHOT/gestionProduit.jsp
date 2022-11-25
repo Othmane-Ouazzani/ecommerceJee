@@ -168,15 +168,15 @@
 
                             <tr role="row" class="odd">
                                 <td class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
-                                <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder">
-                                </td>
-                                <td class="product-name">${produit.nom}</td>
-                                <td class="product-category">${produit.categorie}</td>
-                                <td class="product-price">${produit.qte}</td>
-                                <td class="product-price">$${produit.prix}</td>
+                                <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder"></td>
+                                <td class="product-name">${produit.nom}<span hidden id="pnom-${produit.id}">${produit.nom}</span></td>
+                                <td class="product-category">${produit.categorie}<span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>
+                                <td class="product-price">${produit.qte}<span hidden id="pqte-${produit.id}">${produit.qte}</span></td>
+                                <td class="product-price">$${produit.prix}<span hidden id="pprice-${produit.id}">${produit.prix}</span></td>
+                                <span hidden id="pdes-${produit.id}">${produit.description}</span>
 
                                 <td class="product-action">
-                                    <span class="action-edit"><i class="feather icon-edit"></i></span>
+                                    <span class="cursor-pointer editProduitButton" id="${produit.id}" data-toggle="modal" data-target="#editModal"><i class="feather icon-edit"></i></span>
                                     <span class="cursor-pointer deleteProduitButton" id="${produit.id}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
                                 </td>
                             </tr>
@@ -284,6 +284,105 @@
                     </div>
                 </div>
                 <%-- are you sure deleting --%>
+
+                <%-- edit modal starts--%>
+
+                <div class="modal fade text-left" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel160" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary white">
+                                <h5 class="modal-title" id="myModalLabel160">Primary Modal</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <form action="index" method="post" class="form form-horizontal">
+                            <div class="modal-body">
+
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Nom</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="mpnom" class="form-control" name="pname" placeholder="Product Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Description</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <textarea type="" id="mpdes" class="form-control" name="pdes" placeholder="Description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Quantité</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" id="mpqte" class="form-control" name="pqqte" placeholder="Quantity">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Prix</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="mpprix" class="form-control" name="pprix" placeholder="Price">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Categorie</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" id="mpcat" name="pcat" >
+                                                            <option>IT</option>
+                                                            <option>Hoodies</option>
+                                                            <option>Laptops</option>
+                                                        </select>                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <span>Image</span>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="file" id="mpimage" class="form-control" name="pimage" placeholder="Select Image">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Edit</button>
+
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+<%--                edit modal ends--%>
+
+
                 <!-- add new sidebar ends -->
             </section>
             <!-- Data list view end -->
@@ -308,6 +407,29 @@
         console.log(id)
         document.getElementById("produitIdDelete").innerHTML = id;
         document.getElementById("inputProduitId").setAttribute("value", id);
+    })
+
+    $(".editProduitButton").on("click", function() {
+        let id = $(this).attr("id");
+        let nom = $("#pnom-"+id).text();
+        let categorie = $("#pcat-"+id).text();
+        let prix = $("#pprice-"+id).text();
+        let qte = $("#pqte-"+id).text();
+        let des = $("#pdes-"+id).text();
+
+        $("#mpnom").val(nom);
+        $("#mpdes").val(des);
+        $("#mpprix").val(prix);
+        $("#mpqte").val(qte);
+
+        $("#pcat").find("option").each( function() {
+            var $this = $(this);
+            if ($this.text() == categorie) {
+                $this.attr('selected','selected');
+                return false;
+            }
+        })
+
     })
 </script>
 <!-- END: Body-->

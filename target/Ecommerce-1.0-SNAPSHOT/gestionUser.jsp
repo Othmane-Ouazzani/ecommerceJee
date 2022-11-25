@@ -153,7 +153,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" >Add User</button>
+                                                        <button type="submit" class="btn btn-primary" >Edit User</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -50,6 +50,7 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
                         break;
                     }
+
                     case "": {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
