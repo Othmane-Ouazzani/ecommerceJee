@@ -87,7 +87,7 @@ public class DataClient {
         try {
             connexion.Connect();
             Statement st = connexion.getCnx().createStatement();
-            isUpdated=st.executeUpdate("UPDATE client set login = '"+c.getLogin()+"',nom = '"+c.getNom()+"',prenom = '"+c.getPrenom()+"',password = '"+c.getPassword()+"',tel = '"+c.getTel()+"',   WHERE login ='"+oldLogin+"';");
+            isUpdated=st.executeUpdate("UPDATE client SET login = '"+c.getLogin()+"',nom = '"+c.getNom()+"',prenom = '"+c.getPrenom()+"',password = '"+c.getPassword()+"',tel = '"+c.getTel()+"' WHERE login ='"+oldLogin+"';");
 
         }catch(SQLException e){e.printStackTrace();}
 

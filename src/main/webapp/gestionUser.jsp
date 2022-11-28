@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:if test="${ sessionScope.client == null}">
@@ -153,7 +154,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" >Edit User</button>
+                                                        <button type="submit" class="btn btn-primary" >Add User</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -175,11 +176,11 @@
                                             <tbody>
                                             <c:forEach items="${listeClient}" var="client">
                                                 <tr>
-                                                    <td>${client.nom}<span hidden id="enom-${client.login.replace('@', '-').replace('.', '-')}">${client.nom}</span></td>
-                                                    <td>${client.prenom}<span hidden id="eprenom-${client.login.replace('@', '-').replace('.', '-')}">${client.prenom}</span></td>
-                                                    <td>${client.login}<span hidden id="elogin-${client.login.replace('@', '-').replace('.', '-')}">${client.login}</span></td>
-                                                    <td>${client.tel}<span hidden id="etel-${client.login.replace('@', '-').replace('.', '-')}">${client.tel}</span></td>
-                                                    <td>${client.password}<span hidden id="epassword-${client.login.replace('@', '-').replace('.', '-')}">${client.password}</span></td>
+                                                    <td>${client.nom}</td><span hidden id="enom-${client.login.replace('@', '-').replace('.', '-')}">${client.nom}</span>
+                                                    <td>${client.prenom}</td><span hidden id="eprenom-${client.login.replace('@', '-').replace('.', '-')}">${client.prenom}</span>
+                                                    <td>${client.login}</td><span hidden id="elogin-${client.login.replace('@', '-').replace('.', '-')}">${client.login}</span>
+                                                    <td>${client.tel}</td><span hidden id="etel-${client.login.replace('@', '-').replace('.', '-')}">${client.tel}</span>
+                                                    <td>${client.password}</td><span hidden id="epassword-${client.login.replace('@', '-').replace('.', '-')}">${client.password}</span>
                                                     <td>
                                                         <span class="cursor-pointer editClientButton" id="${client.login}" data-toggle="modal" data-target="#editClientModal"><i class="feather icon-edit"></i></span>
                                                         <span class="cursor-pointer deleteUserButton" id="${client.login}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
@@ -220,8 +221,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="index" method="post">
-                <input type="hidden" name="type" value="addUser">
+            <form action="index" method="post" class="form form-horizontal">
+                <input type="hidden" name="type" value="editClient">
+                <input type="hidden" name="oldLogin" id="oldLogin" value="">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" id="enom" placeholder="First Name" name="fname" class="form-control">
@@ -243,7 +245,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Add User</button>
+                    <button type="submit" class="btn btn-primary" >Edit User</button>
                 </div>
             </form>
         </div>
@@ -309,6 +311,7 @@
         $("#enom").val(nom);
         $("#eprenom").val(prenom);
         $("#eemail").val(email);
+        $("#oldLogin").val(email);
         $("#etel").val(tel);
         $("#epassword").val(password);
         $("#ecpassword").val(password);

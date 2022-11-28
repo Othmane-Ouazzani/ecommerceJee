@@ -38,8 +38,7 @@ public class ClientManager implements  interfaceClient{
 
     @Override
     public int updateClient(Client c, String oldLogin) {
-
-
+        dc.updateClient(c, oldLogin);
         return  0;
     }
 }
