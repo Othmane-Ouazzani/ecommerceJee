@@ -7,6 +7,8 @@
     </li>
     <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=gestProduit"><i class="feather icon-monitor"></i><span class="item" data-i18n="Dashboard">Gestion Produit</span></a>
     </li>
+    <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=gestAchat"><i class="feather icon-shopping-cart"></i><span class="item" data-i18n="Dashboard">Gestion Achat</span></a>
+    </li>
   </ul>
   <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
     <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>

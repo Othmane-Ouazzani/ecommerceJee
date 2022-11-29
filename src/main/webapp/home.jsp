@@ -19,6 +19,13 @@
 <body class="vertical-layout vertical-menu-modern content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="click"
       data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
 
+<%--test if the session not exist--%>
+<c:if test="${sessionScope == null}">
+    <c:redirect url="/index"></c:redirect>
+</c:if>
+<%--end test if the session not exist--%>
+
+
 <!-- BEGIN: Header-->
 <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
     <div class="navbar-wrapper">

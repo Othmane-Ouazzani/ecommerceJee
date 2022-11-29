@@ -41,6 +41,9 @@ public class MainServlet extends HttpServlet {
                     case "register": {
                         request.getRequestDispatcher("register.jsp").forward(request, response);
                         break;
+                    }case "home": {
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        break;
                     }
                     case "gestClient":{
                         request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
@@ -50,7 +53,10 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
                         break;
                     }
-
+                    case "gestAchat":{
+                        request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
+                        break;
+                    }
                     case "": {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;

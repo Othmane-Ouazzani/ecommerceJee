@@ -43,6 +43,12 @@
 
 <!-- BEGIN: Body-->
 
+<%--Test if the session exist--%>
+<c:if test="${sessionScope != null}">
+    <c:redirect url="/index?page=home"></c:redirect>
+</c:if>
+<%--end Test if the session exist--%>
+
 <body class="vertical-layout vertical-menu-modern 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
 <!-- BEGIN: Content-->
 <div class="app-content content">
