@@ -20,7 +20,7 @@
       data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
 
 <%--test if the session not exist--%>
-<c:if test="${sessionScope == null}">
+<c:if test="${sessionScope.client == null}">
     <c:redirect url="/index"></c:redirect>
 </c:if>
 <%--end test if the session not exist--%>

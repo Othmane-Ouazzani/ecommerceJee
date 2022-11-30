@@ -44,7 +44,7 @@
 <!-- BEGIN: Body-->
 
 <%--Test if the session exist--%>
-<c:if test="${sessionScope != null}">
+<c:if test="${sessionScope.client != null}">
     <c:redirect url="/index?page=home"></c:redirect>
 </c:if>
 <%--end Test if the session exist--%>
