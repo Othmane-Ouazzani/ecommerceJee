@@ -3,13 +3,15 @@ package models;
 public class Commande {
 
     int num;
-    Client client;
+    String client;
     String date;
+    int livree;
 
-    public Commande(int num, Client client, String date) {
+    public Commande(int num, String client, String date, int livree) {
         this.num = num;
         this.client = client;
         this.date = date;
+        this.livree = livree;
     }
 
     public int getNum() {
@@ -20,11 +22,11 @@ public class Commande {
         this.num = num;
     }
 
-    public Client getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 
@@ -35,4 +37,8 @@ public class Commande {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getLivree() { return livree; }
+
+    public void setLivree(int livree) { this.livree = livree; }
 }
