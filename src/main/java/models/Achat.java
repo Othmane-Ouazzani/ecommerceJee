@@ -2,29 +2,29 @@ package models;
 
 public class Achat {
 
-    Produit produit;
-    Commande commande;
+    String produit;
+    int commande;
     int qte;
 
-    public Achat(Produit produit, Commande commande, int qte) {
+    public Achat(String produit, int commande, int qte) {
         this.produit = produit;
         this.commande = commande;
         this.qte = qte;
     }
 
-    public Produit getProduit() {
+    public String getProduit() {
         return produit;
     }
 
-    public void setProduit(Produit produit) {
+    public void setProduit(String produit) {
         this.produit = produit;
     }
 
-    public Commande getCommande() {
+    public int getCommande() {
         return commande;
     }
 
-    public void setCommande(Commande commande) {
+    public void setCommande(int commande) {
         this.commande = commande;
     }
 
