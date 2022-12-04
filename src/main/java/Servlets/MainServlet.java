@@ -38,6 +38,15 @@ public class MainServlet extends HttpServlet {
             }
             if (whichPage != null)
                 switch (whichPage) {
+                    case "logout":{
+                        request.getSession().invalidate();
+                        request.getRequestDispatcher("login.jsp").forward(request,response);
+                        break;
+                    }
+                    case "dashboard":{
+                        request.getRequestDispatcher("dashboard.jsp").forward(request,response);
+                        break;
+                    }
                     case "register": {
                         request.getRequestDispatcher("register.jsp").forward(request, response);
                         break;
@@ -118,10 +127,12 @@ public class MainServlet extends HttpServlet {
 
             ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
-
             HttpSession userSession = request.getSession();
             userSession.setAttribute("client", client);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            if(client.getLogin().equals("admin@gmail.com")){
+            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            }
+            else{request.getRequestDispatcher("dashboard.jsp").forward(request, response);}
         }else {
             request.setAttribute("ClientNotExist", "Email or password incorrect!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
