@@ -11,19 +11,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DataCommandeAchat {
-
     Connexion connexion=new Connexion();
-
     public ArrayList<Commande> getCommandesNonLivree() {
         ArrayList<Commande> listeCommandeNonLivre = new ArrayList<>();
         try{
             connexion.Connect();
             Statement st=connexion.getCnx().createStatement();
-            ResultSet rs=st.executeQuery("SELECT*  FROM  commande  WHERE  livree = 0");
+            ResultSet rs=st.executeQuery("SELECT *  FROM  commande WHERE livree = 0");
             connexion.Deconnexion();
-            if(rs.next()) {
-                Commande c = new Commande(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), Integer.parseInt(rs.getString(4)));
-                listeCommandeNonLivre.add(c);
+            while(rs.next()) {
+                listeCommandeNonLivre.add(new Commande(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), Integer.parseInt(rs.getString(4))));
             }
         } catch (SQLException e){e.printStackTrace();}
         return listeCommandeNonLivre;
@@ -62,6 +59,17 @@ public class DataCommandeAchat {
         }
 
         return listeAchat;
+    }
+
+    public int livrerCommande(int commandeId) {
+        int isUpdated=0;
+        try {
+            connexion.Connect();
+            Statement st = connexion.getCnx().createStatement();
+            isUpdated=st.executeUpdate("UPDATE commande SET livree = 1 WHERE num = "+commandeId);
+        }catch(SQLException e){e.printStackTrace();}
+
+        return  isUpdated;
     }
 
 }
