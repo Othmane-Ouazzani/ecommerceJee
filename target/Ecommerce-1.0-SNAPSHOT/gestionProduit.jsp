@@ -124,7 +124,7 @@
 
                             <tr role="row" class="odd">
                                 <td hidden class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
-                                <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder"></td>
+                                <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder"></td><span hidden id="pimage-${produit.id}">${produit.image}</span>
                                 <td class="product-name">${produit.nom}<span hidden id="pnom-${produit.id}">${produit.nom}</span></td>
                                 <td class="product-category">${produit.categorie}<span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>
                                 <td class="product-price">${produit.qte}<span hidden id="pqte-${produit.id}">${produit.qte}</span></td>
@@ -185,10 +185,12 @@
                                     <div class="col-sm-12 data-field-col">
                                         <label for="data-category"> Categorie </label>
                                         <select class="form-control" name="pcategorie" id="data-category">
-                                            <option>Audio</option>
-                                            <option>Computers</option>
-                                            <option>Fitness</option>
-                                            <option>Appliance</option>
+                                            <option value="ordPort">Ordinateurs Protables</option>
+                                            <option value="ordBureau">Ordinateurs De Bureau</option>
+                                            <option value="audioSon">Audio & Son</option>
+                                            <option value="consoles">Consoles</option>
+                                            <option value="accInfo">Accessoires Informatique</option>
+                                            <option value="tele">Télephone</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-12 data-field-col data-list-upload">
@@ -318,10 +320,14 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-control" id="mpcat" name="pcat" >
-                                                            <option>IT</option>
-                                                            <option>Hoodies</option>
-                                                            <option>Laptops</option>
-                                                        </select>                                                    </div>
+                                                            <option value="ordPort">Ordinateurs Protables</option>
+                                                            <option value="ordBureau">Ordinateurs De Bureau</option>
+                                                            <option value="audioSon">Audio & Son</option>
+                                                            <option value="consoles">Consoles</option>
+                                                            <option value="accInfo">Accessoires Informatique</option>
+                                                            <option value="tele">Télephone</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -385,14 +391,16 @@
         let prix = $("#pprice-"+id).text();
         let qte = $("#pqte-"+id).text();
         let des = $("#pdes-"+id).text();
+        let image = $("#pimage-"+id).text();
         $("#moldpid").val(id);
         $("#mpnom").val(nom);
         $("#mpdes").val(des);
         $("#mpprix").val(prix);
         $("#mpqte").val(qte);
         $("#mpid").val(id);
+        $("#mpimage").val(image);
         $("#pcat").find("option").each( function() {
-            var $this = $(this);
+            const $this = $(this);
             if ($this.text() == categorie) {
                 $this.attr('selected','selected');
                 return false;

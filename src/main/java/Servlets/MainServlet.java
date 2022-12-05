@@ -79,10 +79,23 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
                     }
+                    case "shop": {
+                        goToShopByCat(request, response);
+                        break;
+                    }
                 }
             else
                 request.getRequestDispatcher("login.jsp").forward(request, response);
 
+    }
+
+    private void goToShopByCat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String categorie = request.getParameter("category");
+        ArrayList<Produit> produitByCat =  pm.getProduitsByCat(categorie);
+        request.setAttribute("produitByCat", produitByCat);
+//        ArrayList<Produit> listeProduit = pm.getAllProduits();
+//        request.setAttribute("listeProduit", listeProduit);
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
 
     @Override
