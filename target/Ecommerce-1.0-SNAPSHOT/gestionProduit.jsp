@@ -13,10 +13,6 @@
 
 <%@include file="includes/head.jsp" %>
 
-<!-- BEGIN: Head-->
-
-
-<!-- END: Head-->
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
@@ -98,10 +94,10 @@
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
 
                         <div class="clear"></div>
-                        <table class="table data-thumb-view dataTable no-footer dt-checkboxes-select" id="DataTables_Table_0" role="grid">
+                        <table class="table data-thumb-view dataTable no-footer" id="DataTables_Table_0" role="grid">
                             <thead>
                             <tr role="row">
-                                <th class="dt-checkboxes-cell dt-checkboxes-select-all sorting_disabled" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                <th hidden class="dt-checkboxes-cell dt-checkboxes-select-all sorting_disabled" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                     style="width: 34.5938px;" data-col="0" aria-label=""><input type="checkbox"></th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending"
                                     aria-label="Image: activate to sort column descending" style="width: 187.906px;">Image
@@ -127,7 +123,7 @@
                             <c:forEach items="${listeProduit}" var="produit">
 
                             <tr role="row" class="odd">
-                                <td class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
+                                <td hidden class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
                                 <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder"></td>
                                 <td class="product-name">${produit.nom}<span hidden id="pnom-${produit.id}">${produit.nom}</span></td>
                                 <td class="product-category">${produit.categorie}<span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>

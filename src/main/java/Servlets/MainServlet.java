@@ -1,11 +1,14 @@
 package Servlets;
 
 import businessLayer.ClientManager;
+import businessLayer.CommandeAchatManager;
 import businessLayer.ProduitManager;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import models.Achat;
 import models.Client;
+import models.Commande;
 import models.Produit;
 
 import java.io.IOException;
@@ -19,14 +22,20 @@ import static java.lang.Integer.parseUnsignedInt;
 public class MainServlet extends HttpServlet {
     ClientManager cm=new ClientManager();
     ProduitManager pm=new ProduitManager();
+    CommandeAchatManager cam=new CommandeAchatManager();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ArrayList<Produit> listeProduit = pm.getAllProduits();
         ArrayList<Client> listeClient = cm.getAllClients();
+        ArrayList<Commande> listeCommande = cam.getCommandesNonLivree();
+        ArrayList<Achat> listeAchat = cam.getAchats();
 
         request.setAttribute("listeProduit",listeProduit);
         request.setAttribute("listeClient",listeClient);
+        request.setAttribute("listeCommande",listeCommande);
+        request.setAttribute("listeAchat",listeAchat);
+
 
             String whichPage = "";
 
@@ -90,6 +99,7 @@ public class MainServlet extends HttpServlet {
             case "deleteProduit":deleteProduit(request,response);break;
             case "addProduit":addProduit(request, response);break;
             case "editProduit":editProduit(request, response);break;
+            case "livrerCommande":livrerCommande(request, response);break;
             default:
         }
     }
@@ -127,12 +137,15 @@ public class MainServlet extends HttpServlet {
 
             ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
+
             HttpSession userSession = request.getSession();
             userSession.setAttribute("client", client);
-            if(client.getLogin().equals("admin@gmail.com")){
-            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            if(client.getLogin().equals("admin@gmail.com")) {
+                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             }
-            else{request.getRequestDispatcher("dashboard.jsp").forward(request, response);}
+            else{
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+            }
         }else {
             request.setAttribute("ClientNotExist", "Email or password incorrect!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -252,6 +265,20 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("failedUpdating","Email already exists!");
             request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
         }
+    }
+
+    public void livrerCommande(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int commandeId = Integer.parseInt(request.getParameter("commandeId"));
+        cam.livrerCommande(commandeId);
+        ArrayList<Produit> listeProduit = pm.getAllProduits();
+        ArrayList<Commande> listeCommande = cam.getCommandesNonLivree();
+        ArrayList<Achat> listeAchat = cam.getAchats();
+
+        request.setAttribute("listeProduit",listeProduit);
+        request.setAttribute("listeCommande",listeCommande);
+        request.setAttribute("listeAchat",listeAchat);
+
+        request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
     }
 
 }

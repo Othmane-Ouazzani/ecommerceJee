@@ -264,7 +264,6 @@
 
     $(".deleteUserButton").on("click", function() {
         let email = $(this).attr("id");
-        console.log(email)
         document.getElementById("clientIdDelete").innerHTML = email;
         document.getElementById("inputClientEmail").setAttribute("value", email);
     })

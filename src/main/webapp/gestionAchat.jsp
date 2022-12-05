@@ -1,3 +1,7 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Produit" %>
+<%@ page import="models.Commande" %>
+<%@ page import="models.Achat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:if test="${ (sessionScope.client == null) || (sessionScope.client.getLogin()!='admin@gmail.com')}">
@@ -76,103 +80,73 @@
                     <table class="table data-list-view">
                         <thead>
                         <tr>
-                            <th></th>
+                            <th hidden></th>
                             <th>Client</th>
                             <th>Date de commande</th>
                             <th>Produits</th>
+                            <th>Livrer</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="product-name">anas@gmail.com</td>
-                            <td class="product-category">19/01/2022</td>
-                            <td>
-                                <div class="collapse-icon accordion-icon-rotate">
-                                    <div class="accordion" id="accordionExample" data-toggle-hover="true">
-                                        <div class="collapse-margin">
-                                            <div class="card-header" style="width: auto;" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                        <span class="lead collapse-title collapsed">
-                                                            Liste des produits
-                                                        </span>
-                                            </div>
-                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li>
-                                                            <img src="images/gigabyte.jpg" width="50px" height="50px"> <span> - PC gamer Gigayte KD 2021 (x6)</span>
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/gigabyte.jpg" width="50px" height="50px"> <span> - PC gamer Gigayte KD 2021 (x9)</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        <%
+                            ArrayList<Commande> listeCommande = (ArrayList<Commande>) request.getAttribute("listeCommande");
+                            for (int i=0; i<listeCommande.size(); i++) {
+                                out.println("<tr>\n" +
+                                            "<td hidden></td>\n" +
+                                            "<td class=\"product-name\">"+listeCommande.get(i).getClient()+"</td>\n" +
+                                            "<td class=\"product-category\">"+listeCommande.get(i).getClient()+"</td>\n" +
+                                            "<td>" +
+                                                "<div class=\"collapse-icon accordion-icon-rotate\">\n" +
+                                                    "<div class=\"accordion\" id=\"accordionExample\" data-toggle-hover=\"true\">\n" +
+                                                        "<div class=\"collapse-margin\">\n" +
+                                                            "<div class=\"card-header\" style=\"width: auto;\" id=\"heading"+listeCommande.get(i).getNum()+"\" data-toggle=\"collapse\" role=\"button\" data-target=\"#collapse"+listeCommande.get(i).getNum()+"\" aria-expanded=\"false\" aria-controls=\"collapse"+listeCommande.get(i).getNum()+"\">\n" +
+                                                                "<span class=\"lead collapse-title collapsed\"> Liste des produits </span>\n" +
+                                                            "</div>" +
+                                                        "<div id=\"collapse"+listeCommande.get(i).getNum()+"\" class=\"collapse\" aria-labelledby=\"heading"+listeCommande.get(i).getNum()+"\" data-parent=\"#accordionExample\">\n" +
+                                                            "<div class=\"card-body\">\n" +
+                                                                "<ul>");
+                                ArrayList<Achat> listeAchat = (ArrayList<Achat>) request.getAttribute("listeAchat");
+                                ArrayList<Produit> listeProduit = (ArrayList<Produit>) request.getAttribute("listeProduit");
+                                        for(int j=0; j<listeAchat.size(); j++) {
+                                            if(listeAchat.get(j).getCommande() == listeCommande.get(i).getNum()) {
+                                                for(int k=0; k<listeProduit.size(); k++) {
+                                                    if(listeProduit.get(k).getId().equals(listeAchat.get(j).getProduit())) {
+                                                        out.println("<li>\n" +
+                                                                        "<img src=\""+listeProduit.get(k).getImage()+"\" width=\"50px\" height=\"50px\"> <span>-"+listeProduit.get(k).getNom()+"(x"+listeAchat.get(j).getQte()+")</span>\n" +
+                                                                    "</li>");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                                    out.println("</ul>\n" +
+                                                            "</div>\n" +
+                                                        "</div>\n" +
+                                                    "</div>\n" +
+                                                "</div>\n" +
+                                            "</div>\n" +
+                                        "</td>\n" +
+                                        "<td><span class=\"livrerCommandeBtn\" id=\""+listeCommande.get(i).getNum()+"\" data-toggle=\"modal\" data-target=\"#livrerCom\"><i class=\"feather icon-check-circle\"></i></span></td>" +
+                                    "</tr>");
+                            }
+                        %>
                         </tbody>
                     </table>
                 </div>
                 <!-- DataTable ends -->
             </section>
             <!-- Column selectors with Export Options and print table -->
-
         </div>
     </div>
 </div>
-
-<%--edit modal begin--%>
-<div class="modal fade text-left" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalEditClient">Add User form</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="index" method="post" class="form form-horizontal">
-                <input type="hidden" name="type" value="editClient">
-                <input type="hidden" name="oldLogin" id="oldLogin" value="">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" id="enom" placeholder="First Name" name="fname" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="eprenom" placeholder="Last Name" name="lname" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="eemail" placeholder="Email" name="email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="etel" placeholder="Phone number" name="num" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="epassword" name="password" placeholder="Password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="ecpassword" placeholder="Confirm password" name="cpassword" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Edit User</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<%--edit modal end--%>
 
 <!-- END: Content-->
 
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
-<%-- are you sure deleting --%>
-<div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+
+<%-- are you sure livree --%>
+<div class="modal fade text-left" id="livrerCom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger white">
@@ -182,19 +156,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h1>Are you sure? </h1><p>supprimer le client <span id="clientIdDelete"></span></p>
+                <h1>Are you sure? </h1><p>livree la commande <span id="commandeIdLivrer"></span></p>
             </div>
             <div class="modal-footer">
                 <form action="index" method="post">
-                    <input type="hidden" value="deleteClient" name="type">
-                    <input id="inputClientEmail" type="hidden" name="clientEmail">
+                    <input type="hidden" value="livrerCommande" name="type">
+                    <input id="inputCommandeId" type="hidden" name="commandeId">
                     <button type="submit" class="btn btn-danger">Accept</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<%-- are you sure deleting --%>
+<%-- are you sure livree --%>
+
 
 <!-- BEGIN: Footer-->
 <%@include file="includes/footer.jsp" %>
@@ -204,30 +179,10 @@
 <!-- END: Body-->
 
 <script>
-    function removeSpecial(myStr) {
-        return myStr.replace('@', '-').replace('.', '-');
-    }
-
-    $(".deleteUserButton").on("click", function() {
-        let email = $(this).attr("id");
-        console.log(email)
-        document.getElementById("clientIdDelete").innerHTML = email;
-        document.getElementById("inputClientEmail").setAttribute("value", email);
-    })
-    $(".editClientButton").on("click", function() {
-        let email = $(this).attr("id");
-        let nom = $("#enom-" + removeSpecial(email)).text();
-        let prenom = $("#eprenom-" + removeSpecial(email)).text();
-        let tel = $("#etel-" + removeSpecial(email)).text();
-        let password = $("#epassword-" + removeSpecial(email)).text();
-
-        $("#enom").val(nom);
-        $("#eprenom").val(prenom);
-        $("#eemail").val(email);
-        $("#oldLogin").val(email);
-        $("#etel").val(tel);
-        $("#epassword").val(password);
-        $("#ecpassword").val(password);
+    $(".livrerCommandeBtn").on("click", function() {
+        let commandeId = $(this).attr("id");
+        document.getElementById("commandeIdLivrer").innerHTML = commandeId;
+        document.getElementById("inputCommandeId").setAttribute("value", commandeId);
     })
 </script>
 

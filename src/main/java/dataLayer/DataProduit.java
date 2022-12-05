@@ -59,7 +59,10 @@ public class DataProduit implements businessLayer.interfaceProduit {
             connexion.Deconnexion();
             while(rs.next()){
                 listProduits.add(new Produit(rs.getString("id"),rs.getString("nom"),rs.getString("description"),parseInt(rs.getString("qte")),parseFloat(rs.getString("prix")),rs.getString("categorie"),rs.getString("image")));
-            } }catch (SQLException e){e.printStackTrace();}
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
         return listProduits;
 

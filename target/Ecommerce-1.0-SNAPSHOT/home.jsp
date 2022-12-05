@@ -28,7 +28,6 @@
 
 <!-- BEGIN: Header-->
 <%@ include file="includes/header.jsp" %>
-
 <!-- END: Header-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded" data-scroll-to-active="true"
      style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
@@ -46,7 +45,7 @@
     </div>
     <!--    <a href="index.html"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>-->
     <div class="shadow-bottom"></div>
-    
+
     <%@ include file="client-menu.jsp" %>
     
 </div>
