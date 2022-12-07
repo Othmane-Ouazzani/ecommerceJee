@@ -47,7 +47,10 @@
 <script src="app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
 <script src="app-assets/js/scripts/ui/data-list-view.js"></script>
 
-
+<script src="app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+<script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+<script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+<script src="app-assets/vendors/js/extensions/toastr.min.js"></script>
 
 
 

@@ -44,4 +44,10 @@
   <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/file-uploaders/dropzone.css">
   <link rel="stylesheet" type="text/css" href="app-assets/css/pages/data-list-view.css">
 
+  <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+  <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/toastr.css">
+  <!-- END: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.css">
+  <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/extensions/toastr.css">
+
 </head>
