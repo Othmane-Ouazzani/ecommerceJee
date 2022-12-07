@@ -55,7 +55,7 @@ public class DataProduit implements businessLayer.interfaceProduit {
         try{
             connexion.Connect();
             Statement st=connexion.getCnx().createStatement();
-            ResultSet rs=st.executeQuery("SELECT*  FROM  produit  WHERE  categorie ='"+categorie+"';");
+            ResultSet rs=st.executeQuery("SELECT*  FROM  produit  WHERE  categorie ='"+categorie+"' AND qte != 0;");
             connexion.Deconnexion();
             while(rs.next()){
                 listProduits.add(new Produit(rs.getString("id"),rs.getString("nom"),rs.getString("description"),parseInt(rs.getString("qte")),parseFloat(rs.getString("prix")),rs.getString("categorie"),rs.getString("image")));
