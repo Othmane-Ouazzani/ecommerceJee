@@ -185,8 +185,8 @@
                     <i class="fa fa-heart-o"></i> <span>Wishlist</span>
                   </div>
                   <div class="cart">
-                    <i class="feather icon-shopping-cart"></i> <span class="add-to-cart">Add to cart</span> <a href="app-ecommerce-checkout.html"
-                                                                                                               class="view-in-cart d-none">View In Cart</a>
+
+                      <i class="feather icon-shopping-cart"></i><a  href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}"> <span class="text-white">Add to cart</span></a>
                   </div>
                 </div>
               </div>

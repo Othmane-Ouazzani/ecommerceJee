@@ -26,15 +26,23 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         ArrayList<Produit> listeProduit = pm.getAllProduits();
         ArrayList<Client> listeClient = cm.getAllClients();
         ArrayList<Commande> listeCommande = cam.getCommandesNonLivree();
         ArrayList<Achat> listeAchat = cam.getAchats();
 
+
         request.setAttribute("listeProduit",listeProduit);
         request.setAttribute("listeClient",listeClient);
         request.setAttribute("listeCommande",listeCommande);
         request.setAttribute("listeAchat",listeAchat);
+        String cCategory = "";
+        String cProduit="";
+
+        Cookie[] cArray =request.getCookies();
+
+
 
 
             String whichPage = "";
@@ -79,13 +87,46 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
                     }
+
+                    case "panier": {
+                        request.getRequestDispatcher("panier.jsp").forward(request,response);
+                        break;
+                    }
                     case "shop": {
                         goToShopByCat(request, response);
                         break;
                     }
+
                 }
-            else
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+            else {
+
+
+                try {
+                    cCategory = request.getParameter("cCategory");
+                    cProduit=request.getParameter("cProduit");
+                } catch (Exception e) {
+
+                    cCategory = "";
+                    cProduit="";
+
+                }
+                if (cCategory != null && cProduit != null) {
+
+                    addToCart(request,response);
+
+                    if (cCategory.equals("ordPort")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=ordPort");
+                    if (cCategory.equals("ordBureau")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=ordBureau");
+                    if (cCategory.equals("audioSon")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=audioSon");
+                    if (cCategory.equals("consoles")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=consoles");
+                    if (cCategory.equals("tele")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=tele");
+                    if (cCategory.equals("accInfo")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=accInfo");
+
+                } else request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+
+
+
+
 
     }
 
@@ -292,6 +333,38 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("listeAchat",listeAchat);
 
         request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
+    }
+
+    public void addToCart(HttpServletRequest request,HttpServletResponse response){
+
+        Cookie[] cookies = request.getCookies();
+        String prodId = request.getParameter("cProduit");
+        Client client = (Client) request.getSession().getAttribute("client");
+        String clientId = client.getLogin();
+        int isExistRecentCookie = 0;
+        for (Cookie c: cookies) {
+            if(c.getName().equals("panier")) {
+                isExistRecentCookie = 1;
+                String valueCookie = c.getValue();
+                int isValueExists = 0;
+                String[] cookiesValue = c.getValue().split("-");
+                for (String s: cookiesValue) {
+                    if(s.equals(prodId+"/"+clientId)) {
+                        isValueExists = 1;
+                    }
+                }
+                if(isValueExists == 0) {
+                    valueCookie = valueCookie + "-"+prodId+"/"+clientId;
+                    Cookie cookie = new Cookie("panier", valueCookie);
+                    cookie.setMaxAge(604800);
+                    response.addCookie(cookie);
+                }
+            }
+        }
+        if(isExistRecentCookie == 0) {
+            Cookie cookie = new Cookie("panier", prodId+"/"+clientId);
+            response.addCookie(cookie);
+        }
     }
 
 }
