@@ -141,7 +141,7 @@
             <div class="card ecommerce-card">
               <div class="card-content">
                 <div class="item-img text-center">
-                  <a href="app-ecommerce-details.html">
+                  <a href="index?page=detail&prod=${produit.id}">
                     <img class="img-fluid" src="${produit.image}" alt="img-placeholder"></a>
                 </div>
                 <div class="card-body">
@@ -158,8 +158,7 @@
                     </div>
                   </div>
                   <div class="item-name">
-                    <a href="href="index?page=detail&prod=${produit.id}""><c:out value="${produit.nom}"/></a>
-
+                    <a href="index?page=detail&prod=${produit.id}"><c:out value="${produit.nom}"/></a>
                   </div>
                   <div>
                     <p class="item-description">

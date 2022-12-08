@@ -85,7 +85,7 @@
       <div>
         <!-- Ecommerce Content Section Starts -->
         <section class="app-ecommerce-details">
-          <div class="card">
+          <div class="card m-5">
             <div class="card-body">
               <div class="row mb-5 mt-2">
                 <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
@@ -119,7 +119,7 @@
                   <p>Available - <span class="text-success">In stock</span></p>
 
                   <div class="d-flex flex-column flex-sm-row">
-                    <button class="btn btn-primary mr-0 mr-sm-1 mb-1 mb-sm-0"><i class="feather icon-shopping-cart mr-25"></i>ADD TO CART</button>
+                    <a href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}" class="btn btn-primary mr-0 mr-sm-1 mb-1 mb-sm-0"><i class="feather icon-shopping-cart mr-25"></i>ADD TO CART</a>
                   </div>
                   <hr>
                 </div>
@@ -134,7 +134,7 @@
 
         <!-- Ecommerce Content Section Starts -->
         <!-- background Overlay when sidebar is shown  starts-->
-        <div class="shop-content-overlay"></div>
+<%--        <div class="shop-content-overlay"></div>--%>
         <!-- background Overlay when sidebar is shown  ends-->
 
         <!-- Ecommerce Products Starts -->

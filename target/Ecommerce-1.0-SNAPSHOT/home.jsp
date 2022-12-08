@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="content-detached content-right">
-            <div class="content-body">
+            <div class="m-5">
                 <!-- Ecommerce Content Section Starts -->
                 <section id="ecommerce-header">
                     <div class="row">

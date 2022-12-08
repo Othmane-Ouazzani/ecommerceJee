@@ -27,9 +27,9 @@
                                 "                        "+ produit.getNom()+"\n" +
                                 "                    </p>\n" +
                                 "                </div>\n" +
-                                "                <div class=\"img-container w-50 mx-auto my-2 py-75\">\n" +
+                                "                <a href=\"index?page=detail&prod="+produit.getId()+"\" class=\"img-container w-50 mx-auto my-2 py-75\">\n" +
                                 "                    <img src=\""+produit.getImage()+"\" class=\"img-fluid\" alt=\"image\">\n" +
-                                "                </div>\n" +
+                                "                </a>\n" +
                                 "                <div class=\"item-meta\">\n" +
                                 "                    <p class=\"text-primary mb-0\">$"+produit.getPrix()+"</p>\n" +
                                 "                </div>\n" +
