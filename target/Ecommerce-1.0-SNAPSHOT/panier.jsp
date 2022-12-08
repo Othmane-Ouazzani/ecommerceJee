@@ -133,11 +133,6 @@
                                                             "                                        </div>\n" +
                                                             "                                        <div class=\"item-options text-center\">\n" +
                                                             "                                            <div class=\"item-wrapper\">\n" +
-                                                            "                                                <div class=\"item-rating\">\n" +
-                                                            "                                                    <div class=\"badge badge-primary badge-md\">\n" +
-                                                            "                                                        4 <i class=\"feather icon-star ml-25\"></i>\n" +
-                                                            "                                                    </div>\n" +
-                                                            "                                                </div>\n" +
                                                             "                                                <div class=\"item-cost\">\n" +
                                                             "                                                    <h6 class=\"item-price\">\n" +
                                                             "                                                        $"+produit.getPrix()+"\n" +
@@ -149,9 +144,6 @@
                                                             "                                            </div>\n" +
                                                             "                                            <div class=\"wishlist remove-wishlist\">\n" +
                                                             "                                                <i class=\"feather icon-x align-middle\"></i> Remove\n" +
-                                                            "                                            </div>\n" +
-                                                            "                                            <div class=\"cart remove-wishlist\">\n" +
-                                                            "                                                <i class=\"fa fa-heart-o mr-25\"></i> Wishlist\n" +
                                                             "                                            </div>\n" +
                                                             "                                        </div>\n" +
                                                             "                                    </div>\n" +
