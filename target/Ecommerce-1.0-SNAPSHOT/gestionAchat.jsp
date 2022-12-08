@@ -94,7 +94,7 @@
                                 out.println("<tr>\n" +
                                             "<td hidden></td>\n" +
                                             "<td class=\"product-name\">"+listeCommande.get(i).getClient()+"</td>\n" +
-                                            "<td class=\"product-category\">"+listeCommande.get(i).getClient()+"</td>\n" +
+                                            "<td class=\"product-category\">"+listeCommande.get(i).getDate()+"</td>\n" +
                                             "<td>" +
                                                 "<div class=\"collapse-icon accordion-icon-rotate\">\n" +
                                                     "<div class=\"accordion\" id=\"accordionExample\" data-toggle-hover=\"true\">\n" +

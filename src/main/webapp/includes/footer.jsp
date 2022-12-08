@@ -52,7 +52,9 @@
 <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
 <script src="app-assets/vendors/js/extensions/toastr.min.js"></script>
 
-
+<script src="app-assets/vendors/js/extensions/swiper.min.js"></script>
+<script src="app-assets/js/scripts/pages/app-ecommerce-details.js"></script>
+<script src="app-assets/js/scripts/forms/number-input.js"></script>
 
 
 

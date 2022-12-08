@@ -1,3 +1,7 @@
+<%@ page import="jakarta.servlet.http.Cookie" %>
+<%@ page import="models.Produit" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="models.Client" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <c:if test="${ sessionScope.client == null}">
@@ -91,55 +95,68 @@
                     <fieldset class="checkout-step-1 px-0">
                         <section id="place-order" class="list-view product-checkout">
                             <div class="checkout-items">
-                                <div class="card ecommerce-card">
-                                    <div class="card-content">
-                                        <div class="item-img text-center">
-                                            <a href="app-ecommerce-details.html">
-                                                <img src="images/gigabyte.jpg" width="130" height="130" alt="img-placeholder">
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="item-name">
-                                                <a href="app-ecommerce-details.html">Amazon - Fire TV Stick with Alexa Voice Remote - Black</a>
-                                                <span></span>
-                                                <p class="item-company">By <span class="company-name">Amazon</span></p>
-                                                <p class="stock-status-in">In Stock</p>
-                                            </div>
-                                            <div class="item-quantity">
-                                                <p class="quantity-title">Quantity</p>
-                                                <div class="input-group quantity-counter-wrapper">
-                                                    <input type="text" class="quantity-counter" value="1">
-                                                </div>
-                                            </div>
-                                            <p class="delivery-date">Delivery by, Wed Apr 25</p>
-                                            <p class="offers">17% off 4 offers Available</p>
-                                        </div>
-                                        <div class="item-options text-center">
-                                            <div class="item-wrapper">
-                                                <div class="item-rating">
-                                                    <div class="badge badge-primary badge-md">
-                                                        4 <i class="feather icon-star ml-25"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="item-cost">
-                                                    <h6 class="item-price">
-                                                        $39.99
-                                                    </h6>
-                                                    <p class="shipping">
-                                                        <i class="feather icon-shopping-cart"></i> Free Shipping
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="wishlist remove-wishlist">
-                                                <i class="feather icon-x align-middle"></i> Remove
-                                            </div>
-                                            <div class="cart remove-wishlist">
-                                                <i class="fa fa-heart-o mr-25"></i> Wishlist
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <%
+                                    Cookie[] cookies = request.getCookies();
+                                    for(Cookie c: cookies) {
+                                        if(c.getName().equals("panier")) {
+                                            String[] cookieValue = c.getValue().split("-");
+                                            for(String s: cookieValue) {
+                                                String[] prodEtClient = s.split("/");
+                                                if(prodEtClient[1].equals(((Client) session.getAttribute("client")).getLogin())){
+                                                    Produit produit = null;
+                                                    for (Produit p: (ArrayList<Produit>) request.getAttribute("listeProduit")) {
+                                                        if(prodEtClient[0].equals(p.getId()))
+                                                            produit = p;
+                                                    }
+                                                    out.println("<div class=\"card ecommerce-card\">\n" +
+                                                            "                                    <div class=\"card-content\">\n" +
+                                                            "                                        <div class=\"item-img text-center\">\n" +
+                                                            "                                            <a href=\"app-ecommerce-details.html\">\n" +
+                                                            "                                                <img src=\""+produit.getImage()+"  \" width=\"130\" height=\"130\" alt=\"img-placeholder\">\n" +
+                                                            "                                            </a>\n" +
+                                                            "                                        </div>\n" +
+                                                            "                                        <div class=\"card-body\">\n" +
+                                                            "                                            <div class=\"item-name\">\n" +
+                                                            "                                                "+produit.getNom()+
+                                                            "                                                <span></span>\n" +
+                                                            "                                                <p class=\"item-company\">By <span class=\"company-name\">Amazon</span></p>\n" +
+                                                            "                                                <p class=\"stock-status-in\">In Stock</p>\n" +
+                                                            "                                            </div>\n" +
+                                                            "                                            <div class=\"item-quantity\">\n" +
+                                                            "                                                <p class=\"quantity-title\">Quantity</p>\n" +
+                                                            "                                                <div class=\"input-group quantity-counter-wrapper\">\n" +
+                                                            "                                                    <input type=\"text\" class=\"quantity-counter\" value=\"1\">\n" +
+                                                            "                                                </div>\n" +
+                                                            "                                            </div>\n" +
+                                                            "                                            <p class=\"delivery-date\">Delivery by, Wed Apr 25</p>\n" +
+                                                            "                                            <p class=\"offers\">17% off 4 offers Available</p>\n" +
+                                                            "                                        </div>\n" +
+                                                            "                                        <div class=\"item-options text-center\">\n" +
+                                                            "                                            <div class=\"item-wrapper\">\n" +
+                                                            "                                                <div class=\"item-cost\">\n" +
+                                                            "                                                    <h6 class=\"item-price\">\n" +
+                                                            "                                                        $"+produit.getPrix()+"\n" +
+                                                            "                                                    </h6>\n" +
+                                                            "                                                    <p class=\"shipping\">\n" +
+                                                            "                                                        <i class=\"feather icon-shopping-cart\"></i> Free Shipping\n" +
+                                                            "                                                    </p>\n" +
+                                                            "                                                </div>\n" +
+                                                            "                                            </div>\n" +
+                                                            "                                            <div class=\"wishlist remove-wishlist\">\n" +
+                                                            "                                                <i class=\"feather icon-x align-middle\"></i> Remove\n" +
+                                                            "                                            </div>\n" +
+                                                            "                                        </div>\n" +
+                                                            "                                    </div>\n" +
+                                                            "                                </div>");
+                                                }
+                                            }
+                                        }
+                                    }
+                                %>
+
                             </div>
+
+
                             <div class="checkout-options">
                                 <div class="card">
                                     <div class="card-content">

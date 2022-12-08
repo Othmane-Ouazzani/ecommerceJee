@@ -158,7 +158,7 @@
                     </div>
                   </div>
                   <div class="item-name">
-                    <a href="app-ecommerce-details.html"><c:out value="${produit.nom}"/></a>
+                    <a href="href="index?page=detail&prod=${produit.id}""><c:out value="${produit.nom}"/></a>
 
                   </div>
                   <div>
@@ -182,11 +182,10 @@
                     </div>
                   </div>
                   <div class="wishlist">
-                    <i class="fa fa-heart-o"></i> <span>Wishlist</span>
+                    <a class="text-dark" href="index?page=detail&prod=${produit.id}"><span>Detail</span></a><%--Here I changed--%>
                   </div>
                   <div class="cart">
-                    <i class="feather icon-shopping-cart"></i> <span class="add-to-cart">Add to cart</span> <a href="app-ecommerce-checkout.html"
-                                                                                                               class="view-in-cart d-none">View In Cart</a>
+                    <i class="feather icon-shopping-cart"></i><a  href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}"> <span class="text-white">Add to cart</span></a>
                   </div>
                 </div>
               </div>

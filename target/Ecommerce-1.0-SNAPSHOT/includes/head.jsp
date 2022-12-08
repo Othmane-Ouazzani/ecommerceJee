@@ -50,4 +50,7 @@
   <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.css">
   <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/extensions/toastr.css">
 
+  <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/swiper.min.css">
+  <link rel="stylesheet" type="text/css" href="app-assets/css/pages/app-ecommerce-details.css">
+
 </head>
