@@ -147,6 +147,9 @@ public class MainServlet extends HttpServlet {
                 String valueCookie = c.getValue();
                 int isValueExists = 0;
                 String[] cookiesValue = c.getValue().split("-");
+                if(cookiesValue.length == 6) {
+                    valueCookie.replace(cookiesValue[0]+"-", "");
+                }
                 for (String s: cookiesValue) {
                     if(s.equals(prodId+"/"+clientId)) {
                         isValueExists = 1;
