@@ -143,7 +143,7 @@
                                                             "                                                </div>\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <div class=\"wishlist remove-wishlist\">\n" +
-                                                            "                                               <a href=\""+ request.getContextPath()+"/index?action=deleteFromPanier&deleteP="+produit.getId()+"\"> <i class=\"feather icon-x align-middle\"></i> Remove </a>\n" +
+                                                            "                                                <a href=\""+request.getContextPath()+"/index?action=deleteFromPanier&deleteP="+produit.getId()+"\"><i class=\"feather icon-x align-middle\"></i> Remove</a>\n" +
                                                             "                                            </div>\n" +
                                                             "                                        </div>\n" +
                                                             "                                    </div>\n" +

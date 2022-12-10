@@ -94,6 +94,9 @@ public class MainServlet extends HttpServlet {
             else {
                 String cCategory = "";
                 String cProduit="";
+
+                String deleteFromPanier = "";
+
                 try {
                     cCategory = request.getParameter("cCategory");
                     cProduit=request.getParameter("cProduit");
@@ -101,6 +104,15 @@ public class MainServlet extends HttpServlet {
                     cCategory = "";
                     cProduit="";
                 }
+
+                try {
+                    deleteFromPanier = request.getParameter("action");
+                } catch (Exception e) {
+                    deleteFromPanier = "";
+                }
+
+                System.out.println(deleteFromPanier+" this is the deleteFromPanier");
+
                 if (cCategory != null && cProduit != null) {
 
                     addToCart(request,response);
@@ -112,7 +124,10 @@ public class MainServlet extends HttpServlet {
                     if (cCategory.equals("tele")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=tele");
                     if (cCategory.equals("accInfo")) response.sendRedirect(request.getContextPath() + "/index?page=shop&category=accInfo");
 
-                } else {
+                }
+                else if(deleteFromPanier!=null) {
+                    deleteFromCart(request, response);
+                }else {
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             }
@@ -132,6 +147,9 @@ public class MainServlet extends HttpServlet {
                 String valueCookie = c.getValue();
                 int isValueExists = 0;
                 String[] cookiesValue = c.getValue().split("-");
+                if(cookiesValue.length == 6) {
+                    valueCookie.replace(cookiesValue[0]+"-", "");
+                }
                 for (String s: cookiesValue) {
                     if(s.equals(prodId+"/"+clientId)) {
                         isValueExists = 1;
@@ -147,6 +165,7 @@ public class MainServlet extends HttpServlet {
         }
         if(isExistRecentCookie == 0) {
             Cookie cookie = new Cookie("recent", prodId+"/"+clientId);
+            cookie.setMaxAge(604800);
             response.addCookie(cookie);
         }
 
@@ -155,6 +174,35 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("produit", produit);
         request.setAttribute("listeProduit", listeProduit);
         request.getRequestDispatcher("detailProduct.jsp").forward(request, response);
+    }
+
+    public void deleteFromCart(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("in delete from cart");
+        String idProduit = request.getParameter("deleteP");
+        Cookie[] cookies = request.getCookies();
+        for(Cookie c:cookies){
+            if(c.getName().equals("panier")) {
+                System.out.println("in delete from cart IF");
+                String[] cookiesValue = c.getValue().split("-");
+                String value = idProduit+"/"+((Client) request.getSession().getAttribute("client")).getLogin();
+                String newCookie="";
+                for (String s : cookiesValue) {
+                    if(s.equals(value))
+                        continue;
+                    if(s.equals(cookiesValue[cookiesValue.length-1])){
+                        newCookie=newCookie+s;
+                        continue;
+                    }
+                    newCookie=newCookie+(s+"-");
+                }
+                System.out.println(newCookie);
+                Cookie cookie = new Cookie("panier", newCookie);
+                cookie.setMaxAge(604800);
+                response.addCookie(cookie);
+            }
+        }
+        response.sendRedirect(request.getContextPath() + "/index?page=panier");
     }
 
     private void goToShopByCat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
