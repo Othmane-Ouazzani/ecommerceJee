@@ -11,7 +11,7 @@
         Cookie[] co = request.getCookies();
         int nbrElement = 0;
         for(Cookie c: co) {
-          if(c.getName().equals("panier")) {
+          if(c.getName().equals("panier") && !c.getValue().equals("")) {
             String[] cookieValue = c.getValue().split("-");
             for(String s: cookieValue) {
               String[] prodEtClient = s.split("/");
@@ -20,7 +20,6 @@
               }
             }
           }
-
         }
         out.println(""+nbrElement);
       %>
