@@ -11,7 +11,7 @@
             <%
                 Cookie[] cookies = request.getCookies();
                 for(Cookie c: cookies) {
-                    if(c.getName().equals("recent")) {
+                    if(c.getName().equals("recent")  && !c.getValue().equals("")) {
                         String[] cookieValue = c.getValue().split("-");
                         for(String s: cookieValue) {
                             String[] prodEtClient = s.split("/");
