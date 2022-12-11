@@ -181,7 +181,7 @@
                     </div>
                   </div>
                   <div class="wishlist">
-                    <a class="text-dark" href="index?page=detail&prod=${produit.id}"><span>Detail</span></a><%--Here I changed--%>
+                    <a class="text-dark" href="index?page=detail&prod=${produit.id}"><span>Detail</span></a>
                   </div>
                   <div class="cart" >
                     <i class="feather icon-shopping-cart"></i><a disabled="True" href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}"> <span class="text-white">Add to cart</span></a>
