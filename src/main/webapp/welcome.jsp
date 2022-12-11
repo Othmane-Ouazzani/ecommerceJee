@@ -34,11 +34,11 @@
                         <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                     </ul>
                     <ul class="nav navbar-nav bookmark-icons mx-2">
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/index" data-toggle="tooltip" data-placement="top" title="Sign-in"><i class="fa fa-sign-in"></i> Login</a></li>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="index?page=login" data-toggle="tooltip" data-placement="top" title="Sign-in"><i class="fa fa-sign-in"></i> Login</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav bookmark-icons mx-2">
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/index?page=register" data-toggle="tooltip" data-placement="top" title="Sign-up"><i class="fa fa-pencil"></i> Register</a></li>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="index?page=register" data-toggle="tooltip" data-placement="top" title="Sign-up"><i class="fa fa-pencil"></i> Register</a></li>
                     </ul>
 
                 </div>
