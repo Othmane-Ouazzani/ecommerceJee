@@ -89,7 +89,7 @@
         </div>
         <div class="content-detached content-center">
             <div class="content-body">
-                <form action="#" class="icons-tab-steps checkout-tab-steps wizard-circle">
+                <div class="icons-tab-steps checkout-tab-steps wizard-circle">
                     <!-- Checkout Place order starts -->
                     <h6><i class="step-icon step feather icon-shopping-cart"></i>Cart</h6>
                     <fieldset class="checkout-step-1 px-0">
@@ -182,7 +182,7 @@
                                                 <div class="detail-title detail-total">Total</div>
                                                 <div class="detail-amt total-amt">$574</div>
                                             </div>
-                                            <a href="#" class="btn btn-primary btn-block place-order">PLACE ORDER</a>
+                                            <button  type="button" data-toggle="modal" data-target="#Delivery" class="btn btn-primary btn-block place-order">PLACE ORDER</button>
                                         </div>
                                     </div>
                                 </div>
@@ -199,8 +199,182 @@
                     <!-- Checkout Payment Starts -->
 
                     <!-- Checkout Payment Starts -->
-                </form>
+                </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade text-left" id="Delivery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel16">Extra Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header flex-column align-items-start">
+                            <h4 class="card-title">Add New Address</h4>
+                            <p class="text-muted mt-25">Be sure to check "Deliver to this address" when you have finished</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-name">Full Name:</label>
+                                            <input type="text" id="checkout-name" class="form-control required error" name="fname"><label id="checkout-name-error" class="error" for="checkout-name">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-number">Mobile Number:</label>
+                                            <input type="number" id="checkout-number" class="form-control required error" name="mnumber"><label id="checkout-number-error" class="error" for="checkout-number">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-apt-number">Flat, House No:</label>
+                                            <input type="number" id="checkout-apt-number" class="form-control required error" name="apt-number"><label id="checkout-apt-number-error" class="error" for="checkout-apt-number">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-landmark">Landmark e.g. near apollo hospital:</label>
+                                            <input type="text" id="checkout-landmark" class="form-control required error" name="landmark"><label id="checkout-landmark-error" class="error" for="checkout-landmark">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-city">Town/City:</label>
+                                            <input type="text" id="checkout-city" class="form-control required error" name="city"><label id="checkout-city-error" class="error" for="checkout-city">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-pincode">Pincode:</label>
+                                            <input type="number" id="checkout-pincode" class="form-control required error" name="pincode"><label id="checkout-pincode-error" class="error" for="checkout-pincode">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="checkout-state">State:</label>
+                                            <input type="text" id="checkout-state" class="form-control required error" name="state"><label id="checkout-state-error" class="error" for="checkout-state">This field is required.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="add-type">Address Type:</label>
+                                            <select class="form-control" id="add-type">
+                                                <option>Home</option>
+                                                <option>Work</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment-type">
+                            <div class="card">
+                                <div class="card-header flex-column align-items-start">
+                                    <h4 class="card-title">Payment options</h4>
+                                    <p class="text-muted mt-25">Be sure to click on correct payment option</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between flex-wrap">
+                                            <div class="vs-radio-con vs-radio-primary">
+                                                <input type="radio" name="vueradio" checked="" value="false">
+                                                <span class="vs-radio">
+                                                        <span class="vs-radio--border"></span>
+                                                        <span class="vs-radio--circle"></span>
+                                                    </span>
+                                                <img src="../../../app-assets/images/pages/eCommerce/bank.png" alt="img-placeholder" height="40">
+                                                <span>US Unlocked Debit Card 12XX XXXX XXXX 0000
+                                                    </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="customer-cvv mt-1">
+                                            <div class="form-inline">
+                                                <label class="mb-50" for="card-holder-cvv">Enter CVV:</label>
+                                                <input type="number" class="form-control ml-75 mb-50 input-cvv" id="card-holder-cvv">
+                                                <div class="btn btn-primary btn-cvv ml-50 mb-50 waves-effect waves-light">Continue</div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-2">
+                                        <ul class="other-payment-options list-unstyled">
+                                            <li>
+                                                <div class="vs-radio-con vs-radio-primary py-25">
+                                                    <input type="radio" name="vueradio" value="false">
+                                                    <span class="vs-radio">
+                                                            <span class="vs-radio--border"></span>
+                                                            <span class="vs-radio--circle"></span>
+                                                        </span>
+                                                    <span>
+                                                            Credit / Debit / ATM Card
+                                                        </span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="vs-radio-con vs-radio-primary py-25">
+                                                    <input type="radio" name="vueradio" value="false">
+                                                    <span class="vs-radio">
+                                                            <span class="vs-radio--border"></span>
+                                                            <span class="vs-radio--circle"></span>
+                                                        </span>
+                                                    <span>
+                                                            Net Banking
+                                                        </span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="vs-radio-con vs-radio-primary py-25">
+                                                    <input type="radio" name="vueradio" value="false">
+                                                    <span class="vs-radio">
+                                                            <span class="vs-radio--border"></span>
+                                                            <span class="vs-radio--circle"></span>
+                                                        </span>
+                                                    <span>
+                                                            EMI (Easy Installment)
+                                                        </span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="vs-radio-con vs-radio-primary py-25">
+                                                    <input type="radio" name="vueradio" value="false">
+                                                    <span class="vs-radio">
+                                                            <span class="vs-radio--border"></span>
+                                                            <span class="vs-radio--circle"></span>
+                                                        </span>
+                                                    <span>
+                                                            Cash On Delivery
+                                                        </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <hr>
+                                        <div class="gift-card">
+                                            <p><i class="feather icon-plus-square mr-25 font-medium-5"></i>
+                                                Add Gift Card
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Accept</button>
+                </div>
             </div>
         </div>
     </div>

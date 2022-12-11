@@ -183,8 +183,8 @@
                   <div class="wishlist">
                     <a class="text-dark" href="index?page=detail&prod=${produit.id}"><span>Detail</span></a><%--Here I changed--%>
                   </div>
-                  <div class="cart">
-                    <i class="feather icon-shopping-cart"></i><a  href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}"> <span class="text-white">Add to cart</span></a>
+                  <div class="cart" >
+                    <i class="feather icon-shopping-cart"></i><a disabled="True" href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}"> <span class="text-white">Add to cart</span></a>
                   </div>
                 </div>
               </div>
