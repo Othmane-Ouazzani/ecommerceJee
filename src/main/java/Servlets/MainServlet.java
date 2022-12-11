@@ -142,7 +142,7 @@ public class MainServlet extends HttpServlet {
         String clientId = client.getLogin();
         int isExistRecentCookie = 0;
         for (Cookie c: cookies) {
-            if(c.getName().equals("recent")) {
+            if(c.getName().equals("recent") && !c.getValue().equals("")) {
                 isExistRecentCookie = 1;
                 String valueCookie = c.getValue();
                 int isValueExists = 0;
@@ -418,7 +418,7 @@ public class MainServlet extends HttpServlet {
         String clientId = client.getLogin();
         int isExistRecentCookie = 0;
         for (Cookie c: cookies) {
-            if(c.getName().equals("panier")) {
+            if(c.getName().equals("panier") && !c.getValue().equals("")) {
                 isExistRecentCookie = 1;
                 String valueCookie = c.getValue();
                 int isValueExists = 0;
@@ -438,6 +438,7 @@ public class MainServlet extends HttpServlet {
         }
         if(isExistRecentCookie == 0) {
             Cookie cookie = new Cookie("panier", prodId+"/"+clientId);
+            cookie.setMaxAge(604800);
             response.addCookie(cookie);
         }
     }
