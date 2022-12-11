@@ -13,12 +13,12 @@ import models.Produit;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.parseUnsignedInt;
 
-@WebServlet(name = "Servlet", value = {"/index"})
+@WebServlet(name = "Servlet", urlPatterns = {"/index"})
 public class MainServlet extends HttpServlet {
     ClientManager cm=new ClientManager();
     ProduitManager pm=new ProduitManager();
@@ -36,6 +36,10 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("listeCommande",listeCommande);
         request.setAttribute("listeAchat",listeAchat);
 
+        Set<String> params = request.getParameterMap().keySet();
+        if(params.size() == 0) {
+            request.getRequestDispatcher("welcome.jsp").forward(request, response);
+        }else {
             String whichPage = "";
 
             try {
@@ -74,7 +78,7 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
                         break;
                     }
-                    case "": {
+                    case "login": {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
                     }
@@ -131,6 +135,7 @@ public class MainServlet extends HttpServlet {
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             }
+        }
 
     }
 
@@ -147,8 +152,9 @@ public class MainServlet extends HttpServlet {
                 String valueCookie = c.getValue();
                 int isValueExists = 0;
                 String[] cookiesValue = c.getValue().split("-");
+                System.out.println(cookiesValue.length);
                 if(cookiesValue.length == 6) {
-                    valueCookie.replace(cookiesValue[0]+"-", "");
+                    valueCookie = valueCookie.replace(cookiesValue[0]+"-", "");
                 }
                 for (String s: cookiesValue) {
                     if(s.equals(prodId+"/"+clientId)) {

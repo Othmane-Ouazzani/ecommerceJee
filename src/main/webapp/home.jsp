@@ -96,21 +96,6 @@
                                         16285 results found
                                     </div>
                                 </div>
-                                <div class="view-options">
-                                    <select class="price-options form-control" id="ecommerce-price-options">
-                                        <option selected>Featured</option>
-                                        <option value="1">Lowest</option>
-                                        <option value="2">Highest</option>
-                                    </select>
-                                    <div class="view-btn-option">
-                                        <button class="btn btn-white view-btn grid-view-btn active">
-                                            <i class="feather icon-grid"></i>
-                                        </button>
-                                        <button class="btn btn-white list-view-btn view-btn">
-                                            <i class="feather icon-list"></i>
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
