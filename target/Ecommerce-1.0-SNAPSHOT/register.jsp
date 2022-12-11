@@ -121,7 +121,7 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
-                                                <a href="${pageContext.request.contextPath}/index"
+                                                <a href="${pageContext.request.contextPath}/index?page=login"
                                                    class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
                                                 <button type="submit"
                                                         class="btn btn-primary float-right btn-inline mb-50">Register
