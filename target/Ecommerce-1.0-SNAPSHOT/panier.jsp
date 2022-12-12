@@ -4,12 +4,6 @@
 <%@ page import="models.Client" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<c:if test="${ sessionScope.client == null}">
-    <c:redirect url="/index"/>
-</c:if>
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
 
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -21,7 +15,7 @@
 <!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="click"
-      data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
+      data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar" onload="refresh()">
 
 <%--test if the session not exist--%>
 <c:if test="${sessionScope.client == null}">
@@ -97,27 +91,29 @@
                             <div class="checkout-items">
                                 <%
                                     Cookie[] cookies = request.getCookies();
-                                    for(Cookie c: cookies) {
-                                        if(c.getName().equals("panier")  && !c.getValue().equals("")) {
+                                    int i = 0;
+                                    for (Cookie c : cookies) {
+                                        if (c.getName().equals("panier") && !c.getValue().equals("")) {
                                             String[] cookieValue = c.getValue().split("-");
-                                            for(String s: cookieValue) {
+                                            i = 0;
+                                            for (String s : cookieValue) {
                                                 String[] prodEtClient = s.split("/");
-                                                if(prodEtClient[1].equals(((Client) session.getAttribute("client")).getLogin())){
+                                                if (prodEtClient[1].equals(((Client) session.getAttribute("client")).getLogin())) {
                                                     Produit produit = null;
-                                                    for (Produit p: (ArrayList<Produit>) request.getAttribute("listeProduit")) {
-                                                        if(prodEtClient[0].equals(p.getId()))
+                                                    for (Produit p : (ArrayList<Produit>) request.getAttribute("listeProduit")) {
+                                                        if (prodEtClient[0].equals(p.getId()))
                                                             produit = p;
                                                     }
                                                     out.println("<div class=\"card ecommerce-card\">\n" +
                                                             "                                    <div class=\"card-content\">\n" +
                                                             "                                        <div class=\"item-img text-center\">\n" +
                                                             "                                            <a href=\"app-ecommerce-details.html\">\n" +
-                                                            "                                                <img src=\""+produit.getImage()+"  \" width=\"130\" height=\"130\" alt=\"img-placeholder\">\n" +
+                                                            "                                                <img src=\"" + produit.getImage() + "  \" width=\"130\" height=\"130\" alt=\"img-placeholder\">\n" +
                                                             "                                            </a>\n" +
                                                             "                                        </div>\n" +
                                                             "                                        <div class=\"card-body\">\n" +
                                                             "                                            <div class=\"item-name\">\n" +
-                                                            "                                                "+produit.getNom()+
+                                                            "                                                " + produit.getNom() +
                                                             "                                                <span></span>\n" +
                                                             "                                                <p class=\"item-company\">By <span class=\"company-name\">Amazon</span></p>\n" +
                                                             "                                                <p class=\"stock-status-in\">In Stock</p>\n" +
@@ -125,7 +121,7 @@
                                                             "                                            <div class=\"item-quantity\">\n" +
                                                             "                                                <p class=\"quantity-title\">Quantity</p>\n" +
                                                             "                                                <div class=\"input-group quantity-counter-wrapper\">\n" +
-                                                            "                                                    <input type=\"text\" class=\"quantity-counter\" value=\"1\">\n" +
+                                                            "                                                    <input type=\"text\" class=\"quantity-counter\" value=\"1\" max=\""+produit.getQte()+"\">\n" +
                                                             "                                                </div>\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <p class=\"delivery-date\">Delivery by, Wed Apr 25</p>\n" +
@@ -134,8 +130,8 @@
                                                             "                                        <div class=\"item-options text-center\">\n" +
                                                             "                                            <div class=\"item-wrapper\">\n" +
                                                             "                                                <div class=\"item-cost\">\n" +
-                                                            "                                                    <h6 class=\"item-price\">\n" +
-                                                            "                                                        $"+produit.getPrix()+"\n" +
+                                                            "                                                    <h6 id=prixProd" + i + " class=\"item-price\">\n" +
+                                                            "                                                        $" + produit.getPrix() + "\n" +
                                                             "                                                    </h6>\n" +
                                                             "                                                    <p class=\"shipping\">\n" +
                                                             "                                                        <i class=\"feather icon-shopping-cart\"></i> Free Shipping\n" +
@@ -143,13 +139,15 @@
                                                             "                                                </div>\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <div class=\"wishlist remove-wishlist\">\n" +
-                                                            "                                                <a href=\""+request.getContextPath()+"/index?action=deleteFromPanier&deleteP="+produit.getId()+"\"><i class=\"feather icon-x align-middle\"></i> Remove</a>\n" +
+                                                            "                                                <a href=\"" + request.getContextPath() + "/index?action=deleteFromPanier&deleteP=" + produit.getId() + "\"><i class=\"feather icon-x align-middle\"></i> Remove</a>\n" +
                                                             "                                            </div>\n" +
                                                             "                                        </div>\n" +
                                                             "                                    </div>\n" +
                                                             "                                </div>");
                                                 }
+                                                i++;
                                             }
+                                            out.println("<span hidden id=\"nbrDesProduit\">"+i+"</span>");
                                         }
                                     }
                                 %>
@@ -166,7 +164,9 @@
                                                     Nombre des elements
                                                 </div>
                                                 <div class="detail-amt">
-                                                    5
+                                                    <%
+                                                        out.println("" + nbrElement);
+                                                    %>
                                                 </div>
                                             </div>
                                             <div class="detail">
@@ -180,7 +180,7 @@
                                             <hr>
                                             <div class="detail">
                                                 <div class="detail-title detail-total">Total</div>
-                                                <div class="detail-amt total-amt">$574</div>
+                                                <div id="prixTotal" class="detail-amt total-amt"></div>
                                             </div>
                                             <a href="#" class="btn btn-primary btn-block place-order">PLACE ORDER</a>
                                         </div>
@@ -192,7 +192,96 @@
                     <!-- Checkout Place order Ends -->
 
                     <!-- Checkout Customer Address Starts -->
-
+                    <h6><i class="step-icon step feather icon-home"></i>Address</h6>
+                    <fieldset class="checkout-step-2 px-0">
+                        <section id="checkout-address" class="list-view product-checkout">
+                            <div class="card">
+                                <div class="card-header flex-column align-items-start">
+                                    <h4 class="card-title">Add New Address</h4>
+                                    <p class="text-muted mt-25">Be sure to check "Deliver to this address" when you have finished</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-name">Full Name:</label>
+                                                    <input type="text" id="checkout-name" class="form-control required" name="fname">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-number">Mobile Number:</label>
+                                                    <input type="number" id="checkout-number" class="form-control required" name="mnumber">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-apt-number">Flat, House No:</label>
+                                                    <input type="number" id="checkout-apt-number" class="form-control required" name="apt-number">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-landmark">Landmark e.g. near apollo hospital:</label>
+                                                    <input type="text" id="checkout-landmark" class="form-control required" name="landmark">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-city">Town/City:</label>
+                                                    <input type="text" id="checkout-city" class="form-control required" name="city">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-pincode">Pincode:</label>
+                                                    <input type="number" id="checkout-pincode" class="form-control required" name="pincode">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-state">State:</label>
+                                                    <input type="text" id="checkout-state" class="form-control required" name="state">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="add-type">Address Type:</label>
+                                                    <select class="form-control" id="add-type">
+                                                        <option>Home</option>
+                                                        <option>Work</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 offset-md-6">
+                                                <div class="btn btn-primary delivery-address float-right">
+                                                    SAVE AND DELIVER HERE
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="customer-card">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">John Doe</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body actions">
+                                            <p class="mb-0">9447 Glen Eagles Drive</p>
+                                            <p>Lewis Center, OH 43035</p>
+                                            <p>UTC-5: Eastern Standard Time (EST) </p>
+                                            <p>202-555-0140</p>
+                                            <hr>
+                                            <div class="btn btn-primary btn-block delivery-address">DELIVER TO THIS ADDRESS</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
                     <!-- Checkout Customer Address Ends -->
 
 
@@ -214,5 +303,19 @@
 
 </body>
 <!-- END: Body-->
+
+<script>
+    function refresh() {
+        let nbrElements = parseInt(document.getElementById("nbrDesProduit").innerText);
+        let somme = 0;
+        for(let j=0; j<nbrElements; j++) {
+            somme += parseFloat(document.getElementById("qteProd"+j).value) * parseFloat(document.getElementById("prixProd"+j).innerHTML.replace("$", ""));
+        }
+        console.log(somme);
+        document.getElementById("prixTotal").innerHTML = somme+" $";
+    }
+
+
+</script>
 
 </html>

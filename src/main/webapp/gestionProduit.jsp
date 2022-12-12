@@ -126,7 +126,16 @@
                                 <td hidden class="dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes"></td>
                                 <td class="product-img sorting_1"><img src="${produit.image}" alt="Img placeholder"></td><span hidden id="pimage-${produit.id}">${produit.image}</span>
                                 <td class="product-name">${produit.nom}<span hidden id="pnom-${produit.id}">${produit.nom}</span></td>
-                                <td class="product-category">${produit.categorie}<span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>
+                                <td class="product-category">
+                                    <c:choose>
+                                        <c:when test="${produit.categorie == \"ordPort\"}">Ordinateur Portable</c:when>
+                                        <c:when test="${produit.categorie == \"ordBureau\"}">Ordinateurs De Bureau</c:when>
+                                        <c:when test="${produit.categorie == \"audioSon\"}">Audio & Son</c:when>
+                                        <c:when test="${produit.categorie == \"consoles\"}">Consoles</c:when>
+                                        <c:when test="${produit.categorie == \"accInfo\"}">Accessoires Informatique</c:when>
+                                        <c:when test="${produit.categorie == \"ordPort\"}">Télephone</c:when>
+                                    </c:choose>
+                                    <span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>
                                 <td class="product-price">${produit.qte}<span hidden id="pqte-${produit.id}">${produit.qte}</span></td>
                                 <td class="product-price">$${produit.prix}<span hidden id="pprice-${produit.id}">${produit.prix}</span></td>
                                 <span hidden id="pdes-${produit.id}">${produit.description}</span>
@@ -160,7 +169,6 @@
                         </div>
                         <div class="data-items pb-3 ps">
                             <div class="data-fields px-2 mt-3">
-
                                 <div class="row">
                                     <div class="col-sm-12 data-field-col">
                                         <label for="data-id">ID Produit</label>
@@ -268,7 +276,7 @@
                                                         <span>ID Produit</span>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" id="mpid" class="form-control" name="pid" placeholder="Product Name">
+                                                        <input type="text" disabled="true" id="mpid" class="form-control" name="pid" placeholder="Product Name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,15 +406,9 @@
         $("#mpprix").val(prix);
         $("#mpqte").val(qte);
         $("#mpid").val(id);
-        $("#mpimage").val(image);
-        $("#pcat").find("option").each( function() {
-            const $this = $(this);
-            if ($this.text() == categorie) {
-                $this.attr('selected','selected');
-                return false;
-            }
-        })
-
+        // $("#mpimage").val(image);
+        console.log(categorie);
+        $("#mpcat").val(categorie).change();
     })
 </script>
 <!-- END: Body-->
