@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<c:if test="${ sessionScope.client == null}">
-    <c:redirect url="/index"/>
-</c:if>
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
 
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -20,8 +14,8 @@
       data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
 
 <%--test if the session not exist--%>
-<c:if test="${sessionScope.client == null}">
-    <c:redirect url="/index"></c:redirect>
+<c:if test="${ sessionScope.client == null}">
+    <c:redirect url="/index"/>
 </c:if>
 <%--end test if the session not exist--%>
 

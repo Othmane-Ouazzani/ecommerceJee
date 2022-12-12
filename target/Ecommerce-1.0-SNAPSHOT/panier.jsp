@@ -121,7 +121,7 @@
                                                             "                                            <div class=\"item-quantity\">\n" +
                                                             "                                                <p class=\"quantity-title\">Quantity</p>\n" +
                                                             "                                                <div class=\"input-group quantity-counter-wrapper\">\n" +
-                                                            "                                                    <input type=\"text\" class=\"quantity-counter\" value=\"1\" max=\""+produit.getQte()+"\">\n" +
+                                                            "                                                    <input onchange=\"refresh()\" id=\"qteProd"+i+"\" name=\"qteInp"+i+"\" type=\"text\" class=\"quantity-counter\" value=\"1\" max=\""+produit.getQte()+"\">\n" +
                                                             "                                                </div>\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <p class=\"delivery-date\">Delivery by, Wed Apr 25</p>\n" +
