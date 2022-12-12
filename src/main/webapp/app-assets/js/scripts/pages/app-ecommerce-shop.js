@@ -151,23 +151,23 @@ $(document).ready(function () {
   // checkout quantity counter
   var quantityCounter = $(".quantity-counter"),
     CounterMin = 1,
-    CounterMax = 10;
+    CounterMax = quantityCounter.attr("max");
   if (quantityCounter.length > 0) {
     quantityCounter.TouchSpin({
       min: CounterMin,
-      max: CounterMax
+      // max: CounterMax
     }).on('touchspin.on.startdownspin', function () {
-      var $this = $(this);
-      $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
-      if ($this.val() == 1) {
-        $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
-      }
+      // var $this = $(this);
+      // $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
+      // if ($this.val() == 1) {
+      //   $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
+      // }
     }).on('touchspin.on.startupspin', function () {
-      var $this = $(this);
-      $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
-      if ($this.val() == 10) {
-        $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
-      }
+      // var $this = $(this);
+      // $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
+      // if ($this.val() == CounterMax) {
+      //   $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
+      // }
     });
   }
 
