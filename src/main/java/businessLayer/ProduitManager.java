@@ -44,4 +44,9 @@ public class ProduitManager implements  interfaceProduit{
     public int updateProduit(Produit p, String oldId) {
         return dp.updateProduit(p,oldId);
     }
+
+    @Override
+    public int decreasQte(String id, int qte) {
+        return dp.decreasQte(id, qte);
+    }
 }
