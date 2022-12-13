@@ -203,7 +203,7 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-name">City:</label>
+                                                    <label for="checkout-name">Town/City:</label>
                                                     <input type="text" id="checkout-name" class="form-control required" name="city">
                                                 </div>
                                             </div>
@@ -221,35 +221,20 @@
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-landmark">Landmark e.g. near apollo hospital:</label>
-                                                    <input type="text" id="checkout-landmark" class="form-control required" name="landmark">
+                                                    <label for="checkout-landmark">Cardholder Name:</label>
+                                                    <input type="text" id="checkout-landmark" class="form-control required" name="cardHolder">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-city">Town/City:</label>
-                                                    <input type="text" id="checkout-city" class="form-control required" name="city">
+                                                    <label for="checkout-city">Expiry Date:</label>
+                                                    <input type="text" id="checkout-city" class="form-control required" name="expireDate">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-pincode">Pincode:</label>
-                                                    <input type="number" id="checkout-pincode" class="form-control required" name="pincode">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="checkout-state">State:</label>
-                                                    <input type="text" id="checkout-state" class="form-control required" name="state">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="add-type">Address Type:</label>
-                                                    <select class="form-control" id="add-type">
-                                                        <option>Home</option>
-                                                        <option>Work</option>
-                                                    </select>
+                                                    <label for="checkout-pincode">Card number:</label>
+                                                    <input type="number" id="checkout-pincode" class="form-control required" name="cardNumber">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 offset-md-6">
