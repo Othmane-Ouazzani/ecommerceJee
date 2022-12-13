@@ -235,6 +235,8 @@ public class MainServlet extends HttpServlet {
             String idProd = request.getParameter("idInp"+j);
             int maxQte = Integer.parseInt(request.getParameter("maxQte"+j));
             listeAchat.add(new Achat(idProd, 0, qteProd));
+            if(qteProd >= maxQte)
+                qteProd = maxQte;
             prodsId = prodsId + "-" + idProd + "/" + client;
         }
         cam.AddCommande(commande, listeAchat, card);

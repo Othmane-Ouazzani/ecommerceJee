@@ -16,4 +16,6 @@ public interface interfaceProduit {
     int deleteProduit(String id);
 
     int updateProduit(Produit p, String oldId);
+
+    int decreasQte(String id, int qte);
 }

@@ -124,4 +124,14 @@ public class DataProduit implements businessLayer.interfaceProduit {
         return 0;
     }
 
+    public int decreasQuantity(String id, int qte) {
+        int isUpdated=0;
+        try {
+            connexion.Connect();
+            Statement st = connexion.getCnx().createStatement();
+            isUpdated=st.executeUpdate("UPDATE produit set qte = '"+qte+"'  WHERE id ='"+id+"';");
+        }catch(SQLException e){e.printStackTrace();}
+        return  isUpdated;
+    }
+
 }
