@@ -71,7 +71,5 @@ public class Produit {
     public  void setCategorie(String categorie){
         this.categorie=categorie;
     }
-    public String getCategorie(){
-        return this.categorie;
-    }
+    public String getCategorie(){return this.categorie;}
 }

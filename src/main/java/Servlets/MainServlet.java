@@ -238,6 +238,7 @@ public class MainServlet extends HttpServlet {
             if(qteProd >= maxQte)
                 qteProd = maxQte;
             prodsId = prodsId + "-" + idProd + "/" + client;
+            pm.decreasQte(idProd, qteProd);
         }
         cam.AddCommande(commande, listeAchat, card);
         removeMultipleFromCookie(request, response, prodsId);
