@@ -133,7 +133,7 @@
                                         <c:when test="${produit.categorie == \"audioSon\"}">Audio & Son</c:when>
                                         <c:when test="${produit.categorie == \"consoles\"}">Consoles</c:when>
                                         <c:when test="${produit.categorie == \"accInfo\"}">Accessoires Informatique</c:when>
-                                        <c:when test="${produit.categorie == \"ordPort\"}">Télephone</c:when>
+                                        <c:when test="${produit.categorie == \"tele\"}">Télephone</c:when>
                                     </c:choose>
                                     <span hidden id="pcat-${produit.id}">${produit.categorie}</span></td>
                                 <td class="product-price">${produit.qte}<span hidden id="pqte-${produit.id}">${produit.qte}</span></td>

@@ -113,16 +113,16 @@
                                                             "                                            <div class=\"item-name\">\n" +
                                                             "                                                " + produit.getNom() +
                                                             "                                                <span></span>\n" +
-                                                            "                                                <p class=\"item-company\">By <span class=\"company-name\">Amazon</span></p>\n" +
-                                                            "                                                <p class=\"stock-status-in\">In Stock</p>\n" +
+                                                            "                                                <p class=\"item-company\">By <span class=\"company-name\">SDSI-Shop</span></p>\n" +
+                                                            "                                                <p class=\"stock-status-in\">"+produit.getQte()+" In Stock</p>\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <div class=\"item-quantity\">\n" +
                                                             "                                                <p class=\"quantity-title\">Quantity</p>\n" +
                                                             "                                                <div class=\"input-group quantity-counter-wrapper\">\n" +
                                                             "                                                    <input onchange=\"refresh()\" id=\"qteProd"+i+"\" name=\"qteInp"+i+"\" type=\"text\" class=\"quantity-counter\" value=\"1\" max=\""+produit.getQte()+"\">\n" +
                                                             "                                                </div><input hidden name=\"idInp"+i+"\" value=\""+produit.getId()+"\" />\n" +
-                                                            "                                            </div>\n" +
-                                                            "                                            <p class=\"delivery-date\">Delivery by, Wed Apr 25</p>\n" +
+                                                            "                                            </div><input hidden name=\"maxQte"+i+"\" value=\""+produit.getQte()+"\" />\n" +
+                                                            "                                            <p class=\"delivery-date\">If you exceed "+produit.getQte()+" unit, you will have the maximum.</p>\n" +
                                                             "                                            <p class=\"offers\">17% off 4 offers Available</p>\n" +
                                                             "                                        </div>\n" +
                                                             "                                        <div class=\"item-options text-center\">\n" +
@@ -142,9 +142,10 @@
                                                             "                                        </div>\n" +
                                                             "                                    </div>\n" +
                                                             "                                </div>");
+                                                    i++;
                                                 }
-                                                i++;
                                             }
+                                            out.println("<input hidden name=\"nbrDesProduit\" value=\""+i+"\">");
                                             out.println("<span hidden id=\"nbrDesProduit\">"+i+"</span>");
                                         }
                                     }
@@ -203,43 +204,20 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-name">Town/City:</label>
-                                                    <input type="text" id="checkout-name" class="form-control required" name="city">
+                                                    <label for="checkout-city">Town/City:</label>
+                                                    <input type="text" id="checkout-city" class="form-control required" name="city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-number">Address:</label>
-                                                    <input type="number" id="checkout-number" class="form-control required" name="address">
+                                                    <label for="checkout-adresse">Address:</label>
+                                                    <input type="text" id="checkout-adresse" class="form-control required" name="address">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label for="checkout-apt-number">Postal Code:</label>
                                                     <input type="number" id="checkout-apt-number" class="form-control required" name="codePostal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="checkout-landmark">Cardholder Name:</label>
-                                                    <input type="text" id="checkout-landmark" class="form-control required" name="cardHolder">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="checkout-city">Expiry Date:</label>
-                                                    <input type="text" id="checkout-city" class="form-control required" name="expireDate">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="checkout-pincode">Card number:</label>
-                                                    <input type="number" id="checkout-pincode" class="form-control required" name="cardNumber">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 offset-md-6">
-                                                <div class="btn btn-primary delivery-address float-right">
-                                                    SAVE AND DELIVER HERE
                                                 </div>
                                             </div>
                                         </div>
@@ -263,14 +241,44 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-header flex-column align-items-start">
+                                    <h4 class="card-title">Card Informations</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-cardHolder">Cardholder Name:</label>
+                                                    <input type="text" id="checkout-cardHolder" class="form-control required" name="cardHolder">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-expDate">Expiry Date:</label>
+                                                    <input type="date" id="checkout-expDate" class="form-control required" name="expireDate">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkout-cardNum">Card number:</label>
+                                                    <input type="text" id="checkout-cardNum" class="form-control required" name="cardNumber">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 offset-md-6">
+                                                <input hidden value="submitAchat" name="type">
+                                                <button type="submit" class="btn btn-primary delivery-address float-right">
+                                                    SAVE AND DELIVER HERE
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </section>
                     </fieldset>
                     <!-- Checkout Customer Address Ends -->
-
-
-                    <!-- Checkout Payment Starts -->
-
-                    <!-- Checkout Payment Starts -->
                 </form>
 
             </div>

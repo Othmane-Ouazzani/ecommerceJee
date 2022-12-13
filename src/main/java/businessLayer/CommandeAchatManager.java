@@ -2,6 +2,7 @@ package businessLayer;
 
 import dataLayer.DataCommandeAchat;
 import models.Achat;
+import models.Card;
 import models.Commande;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class CommandeAchatManager implements interfaceCommandeAchat {
     private final DataCommandeAchat dca = new DataCommandeAchat();
 
     @Override
-    public int AddCommande(Commande c, ArrayList<Achat> listeAchat) {
-        return dca.AddCommande(c, listeAchat);
+    public int AddCommande(Commande c, ArrayList<Achat> listeAchat, Card card) {
+        return dca.AddCommande(c, listeAchat, card);
     }
 
     @Override
