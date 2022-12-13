@@ -1,6 +1,7 @@
 package businessLayer;
 
 import models.Achat;
+import models.Card;
 import models.Commande;
 
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public interface interfaceCommandeAchat {
 
-    public int AddCommande(Commande c, ArrayList<Achat> listeAchat);
+    public int AddCommande(Commande c, ArrayList<Achat> listeAchat, Card card);
 
     public ArrayList<Commande> getCommandesNonLivree();
 

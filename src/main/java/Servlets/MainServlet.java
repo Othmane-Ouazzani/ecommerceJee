@@ -6,16 +6,16 @@ import businessLayer.ProduitManager;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import models.Achat;
-import models.Client;
-import models.Commande;
-import models.Produit;
+import models.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
 @WebServlet(name = "Servlet", urlPatterns = {"/index"})
@@ -115,8 +115,6 @@ public class MainServlet extends HttpServlet {
                     deleteFromPanier = "";
                 }
 
-                System.out.println(deleteFromPanier+" this is the deleteFromPanier");
-
                 if (cCategory != null && cProduit != null) {
 
                     addToCart(request,response);
@@ -183,31 +181,8 @@ public class MainServlet extends HttpServlet {
     }
 
     public void deleteFromCart(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("in delete from cart");
         String idProduit = request.getParameter("deleteP");
-        Cookie[] cookies = request.getCookies();
-        for(Cookie c:cookies){
-            if(c.getName().equals("panier")) {
-                System.out.println("in delete from cart IF");
-                String[] cookiesValue = c.getValue().split("-");
-                String value = idProduit+"/"+((Client) request.getSession().getAttribute("client")).getLogin();
-                String newCookie="";
-                for (String s : cookiesValue) {
-                    if(s.equals(value))
-                        continue;
-                    if(s.equals(cookiesValue[cookiesValue.length-1])){
-                        newCookie=newCookie+s;
-                        continue;
-                    }
-                    newCookie=newCookie+(s+"-");
-                }
-                System.out.println(newCookie);
-                Cookie cookie = new Cookie("panier", newCookie);
-                cookie.setMaxAge(604800);
-                response.addCookie(cookie);
-            }
-        }
+        removeFromCookie(request, response, idProduit);
         response.sendRedirect(request.getContextPath() + "/index?page=panier");
     }
 
@@ -226,6 +201,7 @@ public class MainServlet extends HttpServlet {
         System.out.println(type);
 
         switch (type){
+            case "submitAchat":submitAchat(request, response);break;
             case "register":register(request,response);break;
             case "login":login(request,response);break;
             case "addUser":addUser(request, response);break;
@@ -235,8 +211,35 @@ public class MainServlet extends HttpServlet {
             case "addProduit":addProduit(request, response);break;
             case "editProduit":editProduit(request, response);break;
             case "livrerCommande":livrerCommande(request, response);break;
-            default:
+            default:break;
         }
+    }
+
+    private void submitAchat(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int nbrProduits = Integer.parseInt(request.getParameter("nbrDesProduit"));
+        //Commande informations
+        String city = request.getParameter("city");
+        String address = request.getParameter("address");
+        String codePostal = request.getParameter("codePostal");
+        //Bank information
+        String cardHolder = request.getParameter("cardHolder");
+        String expireDate = request.getParameter("expireDate");
+        String cardNumber = request.getParameter("cardNumber");
+        String client = ((Client) request.getSession().getAttribute("client")).getLogin();
+        Commande commande = new Commande(0, client, LocalDate.now().toString(), 0, city, codePostal, address);
+        Card card = new Card(cardHolder, expireDate, cardNumber, client);
+        ArrayList<Achat> listeAchat = new ArrayList<>();
+        String prodsId = "";
+        for (int j=0; j<nbrProduits; j++) {
+            int qteProd = Integer.parseInt(request.getParameter("qteInp"+j));
+            String idProd = request.getParameter("idInp"+j);
+            int maxQte = Integer.parseInt(request.getParameter("maxQte"+j));
+            listeAchat.add(new Achat(idProd, 0, qteProd));
+            prodsId = prodsId + "-" + idProd + "/" + client;
+        }
+        cam.AddCommande(commande, listeAchat, card);
+        removeMultipleFromCookie(request, response, prodsId);
+        response.sendRedirect(request.getContextPath() + "/index?page=home");
     }
 
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -447,6 +450,53 @@ public class MainServlet extends HttpServlet {
             cookie.setMaxAge(604800);
             response.addCookie(cookie);
         }
+    }
+
+    public void removeFromCookie(HttpServletRequest request, HttpServletResponse response, String idProduit) {
+        Cookie[] cookies = request.getCookies();
+        for(Cookie c:cookies){
+            if(c.getName().equals("panier")) {
+                String[] cookiesValue = c.getValue().split("-");
+                String value = idProduit+"/"+((Client) request.getSession().getAttribute("client")).getLogin();
+                String newCookie="";
+                for (String s : cookiesValue) {
+                    if(s.equals(value))
+                        continue;
+                    if(s.equals(cookiesValue[cookiesValue.length-1])){
+                        newCookie=newCookie+s;
+                        continue;
+                    }
+                    newCookie=newCookie+(s+"-");
+                }
+                if(newCookie.endsWith("-")) {
+                    newCookie.substring(0, newCookie.length() - 1);
+                }
+                Cookie cookie = new Cookie("panier", newCookie);
+                cookie.setMaxAge(604800);
+                response.addCookie(cookie);
+            }
+        }
+    }
+
+    public void removeMultipleFromCookie(HttpServletRequest request, HttpServletResponse response, String prodsId) {
+        Cookie[] cookies = request.getCookies();
+        String newCookie="";
+        for(Cookie c:cookies){
+            if(c.getName().equals("panier")) {
+                String[] cookiesValue = c.getValue().split("-");
+                for (String s : cookiesValue) {
+                    if(prodsId.contains(s))
+                        continue;
+                    newCookie = newCookie + (s+"-");
+                }
+            }
+        }
+        if(newCookie.endsWith("-")) {
+            newCookie.substring(0, newCookie.length() - 1);
+        }
+        Cookie cookie = new Cookie("panier", newCookie);
+        cookie.setMaxAge(604800);
+        response.addCookie(cookie);
     }
 
 }
