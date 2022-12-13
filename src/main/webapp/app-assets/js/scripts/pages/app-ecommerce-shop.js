@@ -150,24 +150,29 @@ $(document).ready(function () {
 
   // checkout quantity counter
   var quantityCounter = $(".quantity-counter"),
-    CounterMin = 1,
-    CounterMax = quantityCounter.attr("max");
+    CounterMin = 1
+    // CounterMax = quantityCounter.attr("max");
   if (quantityCounter.length > 0) {
     quantityCounter.TouchSpin({
       min: CounterMin,
       // max: CounterMax
     }).on('touchspin.on.startdownspin', function () {
-      // var $this = $(this);
-      // $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
-      // if ($this.val() == 1) {
-      //   $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
-      // }
+      var $this = $(this);
+      $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
+      $('.bootstrap-touchspin-up').removeAttr("hidden");
+      if ($this.val() == 1) {
+        $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
+        $(this).siblings().find('.bootstrap-touchspin-down').attr("hidden", "hidden");
+      }
     }).on('touchspin.on.startupspin', function () {
-      // var $this = $(this);
-      // $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
-      // if ($this.val() == CounterMax) {
-      //   $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
-      // }
+      var $this = $(this);
+      var CounterMax = $(this).attr("max");
+      $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
+      $('.bootstrap-touchspin-down').removeAttr("hidden");
+      if ($this.val() == CounterMax) {
+        $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
+        $(this).siblings().find('.bootstrap-touchspin-up').attr("hidden", "hidden");
+      }
     });
   }
 

@@ -66,8 +66,6 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index?page=home">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">eCommerce</a>
-                                </li>
                                 <li class="breadcrumb-item active">Shop
                                 </li>
                             </ol>
@@ -83,7 +81,7 @@
         </div>
         <div class="content-detached content-center">
             <div class="content-body">
-                <form action="#" class="icons-tab-steps checkout-tab-steps wizard-circle">
+                <form action="index" method="POST" class="icons-tab-steps checkout-tab-steps wizard-circle">
                     <!-- Checkout Place order starts -->
                     <h6><i class="step-icon step feather icon-shopping-cart"></i>Cart</h6>
                     <fieldset class="checkout-step-1 px-0">
@@ -122,7 +120,7 @@
                                                             "                                                <p class=\"quantity-title\">Quantity</p>\n" +
                                                             "                                                <div class=\"input-group quantity-counter-wrapper\">\n" +
                                                             "                                                    <input onchange=\"refresh()\" id=\"qteProd"+i+"\" name=\"qteInp"+i+"\" type=\"text\" class=\"quantity-counter\" value=\"1\" max=\""+produit.getQte()+"\">\n" +
-                                                            "                                                </div>\n" +
+                                                            "                                                </div><input hidden name=\"idInp"+i+"\" value=\""+produit.getId()+"\" />\n" +
                                                             "                                            </div>\n" +
                                                             "                                            <p class=\"delivery-date\">Delivery by, Wed Apr 25</p>\n" +
                                                             "                                            <p class=\"offers\">17% off 4 offers Available</p>\n" +
@@ -205,20 +203,20 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-name">Full Name:</label>
-                                                    <input type="text" id="checkout-name" class="form-control required" name="fname">
+                                                    <label for="checkout-name">City:</label>
+                                                    <input type="text" id="checkout-name" class="form-control required" name="city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-number">Mobile Number:</label>
-                                                    <input type="number" id="checkout-number" class="form-control required" name="mnumber">
+                                                    <label for="checkout-number">Address:</label>
+                                                    <input type="number" id="checkout-number" class="form-control required" name="address">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="checkout-apt-number">Flat, House No:</label>
-                                                    <input type="number" id="checkout-apt-number" class="form-control required" name="apt-number">
+                                                    <label for="checkout-apt-number">Postal Code:</label>
+                                                    <input type="number" id="checkout-apt-number" class="form-control required" name="codePostal">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
@@ -311,7 +309,6 @@
         for(let j=0; j<nbrElements; j++) {
             somme += parseFloat(document.getElementById("qteProd"+j).value) * parseFloat(document.getElementById("prixProd"+j).innerHTML.replace("$", ""));
         }
-        console.log(somme);
         document.getElementById("prixTotal").innerHTML = somme+" $";
     }
 
