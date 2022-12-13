@@ -83,6 +83,8 @@
                             <th hidden></th>
                             <th>Client</th>
                             <th>Date de commande</th>
+                            <th>Ville</th>
+                            <th>Code Postal</th>
                             <th>Produits</th>
                             <th>Livrer</th>
                         </tr>
@@ -95,6 +97,8 @@
                                             "<td hidden></td>\n" +
                                             "<td class=\"product-name\">"+listeCommande.get(i).getClient()+"</td>\n" +
                                             "<td class=\"product-category\">"+listeCommande.get(i).getDate()+"</td>\n" +
+                                            "<td class=\"product-category\">"+listeCommande.get(i).getVille()+"</td>\n" +
+                                            "<td class=\"product-category\">"+listeCommande.get(i).getCodePostal()+"</td>\n" +
                                             "<td>" +
                                                 "<div class=\"collapse-icon accordion-icon-rotate\">\n" +
                                                     "<div class=\"accordion\" id=\"accordionExample\" data-toggle-hover=\"true\">\n" +
