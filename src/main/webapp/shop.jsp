@@ -253,59 +253,7 @@
           <span class="sidebar-close-icon d-block d-md-none">
                             <i class="feather icon-x"></i>
                         </span>
-<%--          <div class="card">--%>
-<%--            <div class="card-body">--%>
 
-<%--              <!-- /Price Filter -->--%>
-<%--              <hr>--%>
-<%--              <!-- /Price Slider -->--%>
-<%--              <div class="price-slider">--%>
-<%--                <div class="price-slider-title mt-1">--%>
-<%--                  <h6 class="filter-title mb-0">Slider</h6>--%>
-<%--                </div>--%>
-<%--                <div class="price-slider">--%>
-<%--                  <div class="price_slider_amount mb-2">--%>
-<%--                  </div>--%>
-<%--                  <div class="form-group">--%>
-<%--                    <div class="slider-sm my-1 range-slider" id="price-slider"></div>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <!-- /Price Range -->--%>
-<%--              <hr>--%>
-<%--              <!-- Categories Starts -->--%>
-<%--              <div id="product-categories">--%>
-<%--                <div class="product-category-title">--%>
-<%--                  <h6 class="filter-title mb-1">Categories</h6>--%>
-<%--                </div>--%>
-<%--                <ul class="list-unstyled categories-list">--%>
-<%--                  <li>--%>
-<%--                                            <span class="vs-radio-con vs-radio-primary py-25">--%>
-<%--                                                <input type="radio" name="category-filter" value="false" checked>--%>
-<%--                                                <span class="vs-radio">--%>
-<%--                                                    <span class="vs-radio--border"></span>--%>
-<%--                                                    <span class="vs-radio--circle"></span>--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-50">Appliances</span>--%>
-<%--                                            </span>--%>
-<%--                  </li>--%>
-<%--                </ul>--%>
-<%--                <!-- Categories Ends -->--%>
-<%--                <hr>--%>
-
-<%--                <hr>--%>
-
-<%--                <hr>--%>
-<%--                <!-- Clear Filters Starts -->--%>
-<%--                <div id="clear-filters">--%>
-<%--                  <button class="btn btn-block btn-primary">CLEAR ALL FILTERS</button>--%>
-<%--                </div>--%>
-<%--                <!-- Clear Filters Ends -->--%>
-
-<%--              </div>--%>
-<%--            </div>--%>
-<%--          </div>--%>
-          <!-- Ecommerce Sidebar Ends -->
 
         </div>
       </div>

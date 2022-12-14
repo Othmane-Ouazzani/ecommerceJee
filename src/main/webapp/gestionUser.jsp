@@ -282,7 +282,7 @@
                         <input type="text" id="eprenom" placeholder="Last Name" name="lname" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="email" id="eemail" placeholder="Email" name="email" class="form-control">
+                        <input  type="email" id="eemail" placeholder="Email" name="email" class="form-control">
                     </div>
                     <div class="form-group">
                         <input type="text" id="etel" placeholder="Phone number" name="num" class="form-control">
