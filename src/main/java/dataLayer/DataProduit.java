@@ -124,7 +124,7 @@ public class DataProduit implements businessLayer.interfaceProduit {
         return 0;
     }
 
-    public int decreasQuantity(String id, int qte) {
+    public int decreasQte(String id, int qte) {
         int isUpdated=0;
         try {
             connexion.Connect();

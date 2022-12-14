@@ -25,6 +25,23 @@
       %>
     </span></a>
     </li>
+    <li class="nav-item has-sub sidebar-group-active"><a href="#"><i class="feather icon-tag"></i><span class="menu-title" data-i18n="Ecommerce">Categories</span></a>
+      <ul class="menu-content" style="">
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=ordPort"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Ordinateurs Protables</span></a>
+        </li>
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=ordBureau"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Ordinateurs  Bureau</span></a>
+        </li>
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=audioSon"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Audio & Son</span></a>
+        </li>
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=consoles"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Consoles</span></a>
+        </li>
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=accInfo"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Accesoires Informatique</span></a>
+        </li>
+        <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=tele"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Telephones</span></a>
+        </li>
+
+      </ul>
+    </li>
   </ul>
   <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
     <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>

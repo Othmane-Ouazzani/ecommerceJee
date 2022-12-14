@@ -1,9 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%--test if the session not exist--%>
+<c:if test="${ sessionScope.client == null}">
+    <c:redirect url="/index"/>
+</c:if>
+<c:if test="${ sessionScope.client.getLogin() ==\"admin@gmail.com\"}">
+    <c:redirect url="/index?page=dashboard"/>
+</c:if>
+<%--end test if the session not exist--%>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
+<c:set var="SuccessOrder" scope="session" value="${OrderAdded}"/>
+
 
 <%@include file="includes/head.jsp" %>
 <!-- END: Head-->
@@ -13,11 +23,7 @@
 <body class="vertical-layout vertical-menu-modern content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="click"
       data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
 
-<%--test if the session not exist--%>
-<c:if test="${ sessionScope.client == null}">
-    <c:redirect url="/index"/>
-</c:if>
-<%--end test if the session not exist--%>
+
 
 
 <!-- BEGIN: Header-->
@@ -29,7 +35,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
                 <div class="brand-logo"></div>
-                <h2 class="brand-text mb-0">Vuexy</h2></a>
+                <h2 class="brand-text mb-0">SDSI Shop</h2></a>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
                     class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
                     class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
@@ -86,9 +92,7 @@
                                     <button class="navbar-toggler shop-sidebar-toggler" type="button" data-toggle="collapse">
                                         <span class="navbar-toggler-icon d-block d-lg-none"><i class="feather icon-menu"></i></span>
                                     </button>
-                                    <div class="search-results">
-                                        16285 results found
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -99,22 +103,20 @@
                 <div class="shop-content-overlay"></div>
                 <!-- background Overlay when sidebar is shown  ends-->
 
-                <!-- Ecommerce Search Bar Starts -->
-                <section id="ecommerce-searchbar">
-                    <div class="row mt-1">
-                        <div class="col-sm-12">
-                            <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="iconLeft5" placeholder="Search here">
-                                <div class="form-control-position">
-                                    <i class="feather icon-search"></i>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </section>
-                <!-- Ecommerce Search Bar Ends -->
+
 
                 <!-- Ecommerce Products Starts -->
+                <c:if test="${SuccessOrder!=null}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${SuccessOrder}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="SuccessOrder"/>
+                </c:if>
                 <section id="ecommerce-products" class="grid-view">
                     <%@ include file="includes/categories.jsp"%>
                 </section>

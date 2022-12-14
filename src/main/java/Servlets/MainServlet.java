@@ -8,7 +8,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import models.*;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +20,11 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+
 @WebServlet(name = "Servlet", urlPatterns = {"/index"})
+@MultipartConfig
 public class MainServlet extends HttpServlet {
     ClientManager cm=new ClientManager();
     ProduitManager pm=new ProduitManager();
@@ -183,6 +189,7 @@ public class MainServlet extends HttpServlet {
     public void deleteFromCart(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         String idProduit = request.getParameter("deleteP");
         removeFromCookie(request, response, idProduit);
+        request.setAttribute("RemovedFromCart","Prduct removed from cart");
         response.sendRedirect(request.getContextPath() + "/index?page=panier");
     }
 
@@ -197,8 +204,18 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String type = request.getParameter("type");
-        System.out.println(type);
+
+        String contentType = request.getContentType();
+        String type = "";
+        if (contentType != null && contentType.equals("multipart/form-data")) {
+            Part p = request.getPart("type");
+            type = p.getName();
+        }else{
+            type = request.getParameter("type");
+            System.out.println(type);
+        }
+        type = request.getParameter("type");
+
 
         switch (type){
             case "submitAchat":submitAchat(request, response);break;
@@ -240,6 +257,7 @@ public class MainServlet extends HttpServlet {
             prodsId = prodsId + "-" + idProd + "/" + client;
             pm.decreasQte(idProd, qteProd);
         }
+        request.setAttribute("Order added successfully","OrderAdded");
         cam.AddCommande(commande, listeAchat, card);
         removeMultipleFromCookie(request, response, prodsId);
         response.sendRedirect(request.getContextPath() + "/index?page=home");
@@ -255,12 +273,17 @@ public class MainServlet extends HttpServlet {
         String num = request.getParameter("num");
         if (cm.isClientExist(email)==0) {
             if (password.equals(cpassword) && cm.getClient(email) == null) {
-                Client client = new Client(email, password, nom, prenom, num);
+
+                Client client = new Client(email,BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
                 cm.addClient(client);
                 request.setAttribute("successRegister","Successful registration");
                 ArrayList<Client> listeClient = cm.getAllClients();
                 request.setAttribute("listeClient",listeClient);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            if(!password.equals(cpassword)){
+                request.setAttribute("registerNoMDP","Password and confirmation password must match!");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
             }
         }else{
             request.setAttribute("failedRegister","Email already exists!");
@@ -274,7 +297,7 @@ public class MainServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Client client = cm.getClient(email);
-        if(client != null && client.getPassword().equals(password)) {
+        if(client != null && BCrypt.checkpw(password,client.getPassword())) {
 
             ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
@@ -307,7 +330,13 @@ public class MainServlet extends HttpServlet {
                 cm.addClient(client);
                 ArrayList<Client> listeClient = cm.getAllClients();
                 request.setAttribute("listeClient",listeClient);
-                request.setAttribute("userAdded","Successful registration");
+                request.setAttribute("userAdded","User added successfuly");
+                request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+            }
+            else {
+                ArrayList<Client> listeClient = cm.getAllClients();
+                request.setAttribute("listeClient",listeClient);
+                request.setAttribute("noMatchMDP","Password and confirmation password must match");
                 request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
             }
         }else{
@@ -322,40 +351,46 @@ public class MainServlet extends HttpServlet {
         cm.deleteClient(request.getParameter("clientEmail"));
         ArrayList<Client> listeClient = cm.getAllClients();
         request.setAttribute("listeClient",listeClient);
+        request.setAttribute("userDeleted","User deleted successfully");
         request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+
     }
 
     private void deleteProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         pm.deleteProduit(request.getParameter("produitId"));
         ArrayList<Produit> listeProduit = pm.getAllProduits();
         request.setAttribute("listeProduit",listeProduit);
+        request.setAttribute("DeletedProduct","Product deleted successfully");
         request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
     }
 
     private void addProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.err.println("Here is addProduit");
+
         String id = request.getParameter("pid");
         String nom = request.getParameter("pnom");
         String description = request.getParameter("pdescription");
         String qte = request.getParameter("pqte");
         String prix = request.getParameter("pprix");
         String categorie = request.getParameter("pcategorie");
-        String image="images/"+request.getParameter("pimage");
+        String image = "images/"+processRequest(request, response);
+//        String image="images/"+request.getParameter("pimage");
         if (pm.isProduitExist(id)==0) {
-            System.out.println("doesnt exist");
-
-            System.out.println("not null");
             Produit produit = new Produit(id, nom, description,parseInt(qte),parseFloat(prix) ,categorie,image);
             pm.insertProduit(produit);
-            request.setAttribute("produitAdded","Successful product insertion");
+            request.setAttribute("produitAdded","Product added successfully");
             ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
+            try {
+                Thread.sleep(2000);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
-
         }else{
             request.setAttribute("PfailedAdding","ID already exists!");
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
         }
+
     }
     private void editProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String oldId = request.getParameter("oldpid");
@@ -365,17 +400,22 @@ public class MainServlet extends HttpServlet {
         String qte = request.getParameter("pqte");
         String prix = request.getParameter("pprix");
         String categorie = request.getParameter("pcat");
-        String image="images/"+request.getParameter("pimage");
+        String image = "images/"+processRequest(request, response);
+//        String image="images/"+request.getParameter("pimage");
         if (pm.isProduitExist(id)==0 || oldId.equals(id)){
             System.out.println("doesnt exist");
             System.out.println(oldId+prix + "  " + qte+id);
             Produit produit = new Produit(id, nom, description,parseInt(qte),parseFloat(prix),categorie,image);
             System.err.println(pm.updateProduit(produit,oldId));
-            request.setAttribute("produitUpdated","Successful product update");
+            request.setAttribute("produitUpdated","Product edited successfully");
             ArrayList<Produit> listeProduit = pm.getAllProduits();
             request.setAttribute("listeProduit",listeProduit);
+            try {
+                Thread.sleep(2000);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
-
         }else{
             request.setAttribute("PfailedEditing","ID already exists!");
             request.getRequestDispatcher("gestionProduit.jsp").forward(request, response);
@@ -397,7 +437,7 @@ public class MainServlet extends HttpServlet {
                 Client client = new Client(email, password, nom, prenom, num);
                 System.out.println("everything is good");
                 cm.updateClient(client, oldLogin);
-                request.setAttribute("userEdited","Successful Update");
+                request.setAttribute("userEdited","User updated successfully");
                 ArrayList<Client> listeClient = cm.getAllClients();
                 request.setAttribute("listeClient",listeClient);
                 request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
@@ -418,6 +458,7 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("listeProduit",listeProduit);
         request.setAttribute("listeCommande",listeCommande);
         request.setAttribute("listeAchat",listeAchat);
+        request.setAttribute("Delivered","Order delivered successfully");
 
         request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
     }
@@ -442,6 +483,7 @@ public class MainServlet extends HttpServlet {
                 }
                 if(isValueExists == 0) {
                     valueCookie = valueCookie + "-"+prodId+"/"+clientId;
+                    valueCookie.replace("--","-");
                     Cookie cookie = new Cookie("panier", valueCookie);
                     cookie.setMaxAge(604800);
                     response.addCookie(cookie);
@@ -449,10 +491,11 @@ public class MainServlet extends HttpServlet {
             }
         }
         if(isExistRecentCookie == 0) {
-            Cookie cookie = new Cookie("panier", prodId+"/"+clientId);
+            Cookie cookie = new Cookie("panier", (prodId+"/"+clientId).replace("--","-"));
             cookie.setMaxAge(604800);
             response.addCookie(cookie);
         }
+
     }
 
     public void removeFromCookie(HttpServletRequest request, HttpServletResponse response, String idProduit) {
@@ -474,11 +517,19 @@ public class MainServlet extends HttpServlet {
                 if(newCookie.endsWith("-")) {
                     newCookie.substring(0, newCookie.length() - 1);
                 }
+                newCookie.replace("--","-");
+
+                if(newCookie.endsWith("-")) {
+                    newCookie.substring(0, newCookie.length() - 1);
+                    System.err.println("Cookie fixed with substring");
+                }
+                System.out.println("Cookie fixed 1"+newCookie);
                 Cookie cookie = new Cookie("panier", newCookie);
                 cookie.setMaxAge(604800);
                 response.addCookie(cookie);
             }
         }
+
     }
 
     public void removeMultipleFromCookie(HttpServletRequest request, HttpServletResponse response, String prodsId) {
@@ -497,9 +548,49 @@ public class MainServlet extends HttpServlet {
         if(newCookie.endsWith("-")) {
             newCookie.substring(0, newCookie.length() - 1);
         }
+        newCookie.replace("--","-");
+        if(newCookie.endsWith("-")) {
+            newCookie.substring(0, newCookie.length() - 1);
+        }
+        System.out.println("Cookie fixed 2"+newCookie);
         Cookie cookie = new Cookie("panier", newCookie);
         cookie.setMaxAge(604800);
         response.addCookie(cookie);
+    }
+
+    protected String processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        //fetch form data
+        Part part = request.getPart("pimage");
+        String fileName = part.getSubmittedFileName();
+        String path ="C:\\Users\\othma\\OneDrive\\JEE\\IntelliJ\\Ecommerce\\src\\main\\webapp\\images\\"+fileName;
+        InputStream is = part.getInputStream();
+        boolean test = uploadFile(is, path);
+        if (test) {
+            return fileName;
+        } else {
+            return "";
+        }
+    }
+    public boolean uploadFile(InputStream is, String path){
+        boolean test = false;
+        try{
+            byte[] byt = new byte[is.available()];
+            is.read(byt);
+
+            FileOutputStream fops = new FileOutputStream(path);
+            fops.write(byt);
+            fops.flush();
+            fops.close();
+
+            test = true;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return test;
     }
 
 }

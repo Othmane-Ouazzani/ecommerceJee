@@ -4,6 +4,14 @@
 <c:if test="${ (sessionScope.client == null) || (sessionScope.client.getLogin()!='admin@gmail.com')}">
     <c:redirect url="/index" />
 </c:if>
+<c:set var="SuccessRegister" scope="session" value="${userAdded}"/>
+<c:set var="FailedRegister" scope="session" value="${failedAdding}"/>
+<c:set var="DeletedUser" scope="session" value="${userDeleted}"/>
+<c:set var="EditeddUser" scope="session" value="${userEdited}"/>
+<c:set var="ErrorUpdate" scope="session" value="${failedUpdating}"/>
+<c:set var="noMDP" scope="session" value="${noMatchMDP}"/>
+
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -21,9 +29,9 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded" data-scroll-to-active="true" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="navbar-header expanded">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
                 <div class="brand-logo"></div>
-                <h2 class="brand-text mb-0">Vuexy</h2>
+                <h2 class="brand-text mb-0">SDSI Shop</h2>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
 
             </a></li>
@@ -47,12 +55,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">DataTables</h2>
+                        <h2 class="content-header-title float-left mb-0">Users List</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Datatable
+                                <li class="breadcrumb-item active">Users
                                 </li>
                             </ol>
                         </div>
@@ -71,7 +79,7 @@
         <div class="content-body">
             <div class="row">
                 <div class="col-12">
-                    <p>Read full documnetation <a href="https://datatables.net/" target="_blank">here</a></p>
+
                 </div>
             </div>
 
@@ -128,6 +136,79 @@
                                         </div>
                                     </div>
                                     </p>
+                                    <c:if test="${SuccessRegister!=null}">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${SuccessRegister}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="SuccessRegister"/>
+                                    </c:if>
+
+                                    <c:if test="${FailedRegister!=null}">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${FailedRegister}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="FailedRegister"/>
+                                    </c:if>
+
+                                    <c:if test="${DeletedUser!=null}">
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${DeletedUser}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="DeletedUser"/>
+                                    </c:if>
+
+                                    <c:if test="${EditeddUser!=null}">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${EditeddUser}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="EditeddUser"/>
+                                    </c:if>
+
+                                    <c:if test="${ErrorUpdate!=null}">
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${ErrorUpdate}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="ErrorUpdate"/>
+                                    </c:if>
+
+                                    <c:if test="${noMDP!=null}">
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${noMDP}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="noMDP"/>
+                                    </c:if>
+
+
                                     <div class="table-responsive">
                                         <table class="table table-striped dataex-html5-selectors">
                                             <thead>
@@ -142,6 +223,7 @@
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${listeClient}" var="client">
+                                                <c:if test="${client.getLogin()!=\"admin@gmail.com\"}">
                                                 <tr>
                                                     <td>${client.nom}</td><span hidden id="enom-${client.login.replace('@', '-').replace('.', '-')}">${client.nom}</span>
                                                     <td>${client.prenom}</td><span hidden id="eprenom-${client.login.replace('@', '-').replace('.', '-')}">${client.prenom}</span>
@@ -153,6 +235,7 @@
                                                         <span class="cursor-pointer deleteUserButton" id="${client.login}" data-toggle="modal" data-target="#danger"><i class="feather icon-trash"></i></span>
                                                     </td>
                                                 </tr>
+                                                </c:if>
                                             </c:forEach>
                                             </tbody>
                                             <tfoot>

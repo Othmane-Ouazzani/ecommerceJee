@@ -33,9 +33,9 @@
      style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
   <div class="navbar-header expanded">
     <ul class="nav navbar-nav flex-row">
-      <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
+      <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
         <div class="brand-logo"></div>
-        <h2 class="brand-text mb-0">Vuexy</h2>
+        <h2 class="brand-text mb-0">SDSI Shop</h2>
       <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
               class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
               class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>

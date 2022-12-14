@@ -5,6 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+
+
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -23,7 +26,7 @@
 </c:if>
 <%--end test if the session not exist--%>
 
-
+<c:set var="Removed" scope="session" value="${RemovedFromCart}"/>
 <!-- BEGIN: Header-->
 <%@ include file="includes/header.jsp" %>
 <!-- END: Header-->
@@ -32,9 +35,9 @@
     <div class="navbar-header expanded">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
+                <a class="navbar-brand" href="index">
                     <div class="brand-logo"></div>
-                    <h2 class="brand-text mb-0">Vuexy</h2>
+                    <h2 class="brand-text mb-0">SDSI Shop</h2>
                 </a>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
                     class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
@@ -62,6 +65,7 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Shop</h2>
+
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index?page=home">Home</a>
@@ -80,6 +84,18 @@
             </div>
         </div>
         <div class="content-detached content-center">
+            ${Removed}
+            <c:if test="${Removed!=null}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="mb-0">
+                            ${Removed}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                    </button>
+                </div>
+                <c:remove var="Removed"/>
+            </c:if>
             <div class="content-body">
                 <form action="index" method="POST" class="icons-tab-steps checkout-tab-steps wizard-circle">
                     <!-- Checkout Place order starts -->

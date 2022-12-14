@@ -7,6 +7,9 @@
 <c:if test="${ (sessionScope.client == null) || (sessionScope.client.getLogin()!='admin@gmail.com')}">
     <c:redirect url="/index"/>
 </c:if>
+
+<c:set var="DeliverSuccess" scope="session" value="${Delivered}"/>
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -24,9 +27,9 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow expanded" data-scroll-to-active="true" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="navbar-header expanded">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
                 <div class="brand-logo"></div>
-                <h2 class="brand-text mb-0">Vuexy</h2>
+                <h2 class="brand-text mb-0">SDSI Shop</h2>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
 
             </a></li>
@@ -50,12 +53,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">DataTables</h2>
+                        <h2 class="content-header-title float-left mb-0">Purchases List</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Datatable
+                                <li class="breadcrumb-item active">Purchases
                                 </li>
                             </ol>
                         </div>
@@ -71,6 +74,17 @@
                 </div>
             </div>
         </div>
+        <c:if test="${DeliverSuccess!=null}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="mb-0">
+                        ${DeliverSuccess}
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                </button>
+            </div>
+            <c:remove var="DeliverSuccess"/>
+        </c:if>
         <div class="content-body">
 
             <!-- Column selectors with Export Options and print table -->
@@ -153,20 +167,20 @@
 <div class="modal fade text-left" id="livrerCom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-danger white">
-                <h5 class="modal-title" id="myModalLabel120">Danger</h5>
+            <div class="modal-header bg-primary white">
+                <h5 class="modal-title" id="myModalLabel120">Deliver</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h1>Are you sure? </h1><p>livree la commande <span id="commandeIdLivrer"></span></p>
+                <h1>Are you sure? </h1><p>Do you want to deliver the order number : <span id="commandeIdLivrer"></span></p>
             </div>
             <div class="modal-footer">
                 <form action="index" method="post">
                     <input type="hidden" value="livrerCommande" name="type">
                     <input id="inputCommandeId" type="hidden" name="commandeId">
-                    <button type="submit" class="btn btn-danger">Accept</button>
+                    <button type="submit" class="btn btn-primary">Accept</button>
                 </form>
             </div>
         </div>

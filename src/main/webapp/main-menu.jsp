@@ -1,7 +1,6 @@
 <div class="main-menu-content ps ps--active-y">
   <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-    <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=dashboard"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span
-            class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+    <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=dashboard"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span></a>
     </li>
     <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=gestClient"><i class="feather icon-user"></i><span class="item" data-i18n="Dashboard">Gestion Client</span></a>
     </li>

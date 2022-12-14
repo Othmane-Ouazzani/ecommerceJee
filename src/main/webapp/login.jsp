@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
+<c:set var="ErrorLogin" scope="session" value="${ClientNotExist}"/>
+<c:set var="SuccessRegister" scope="session" value="${successRegister}"/>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
-
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/validation/form-validation.css">
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
@@ -74,11 +76,36 @@
                                     </div>
                                     <p class="px-2">Welcome back, please login to your account.</p>
                                     <div class="card-content">
+                                        <c:if test="${ErrorLogin!=null}">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <p class="mb-0">
+                                                    ${ErrorLogin}
+                                                </p>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                                </button>
+                                            </div>
+                                            <c:remove var="ErrorLogin"/>
+                                        </c:if>
+                                        <c:if test="${SuccessRegister!=null}">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <p class="mb-0">
+                                                        ${SuccessRegister}
+                                                </p>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                                </button>
+                                            </div>
+                                            <c:remove var="SuccessRegister"/>
+                                        </c:if>
                                         <div class="card-body pt-1">
-                                            <form action="index" method="post">
+                                            <form action="index" method="post" >
                                                 <input type="text" hidden name="type" value="login">
+
+
+
                                                 <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                                    <input type="email" class="form-control"  required data-validation-required-message="Must be a valid email" aria-invalid="false" name="email" id="email" placeholder="Email" >
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>
                                                     </div>
@@ -150,6 +177,9 @@
 <script src="app-assets/js/core/app-menu.js"></script>
 <script src="app-assets/js/core/app.js"></script>
 <script src="app-assets/js/scripts/components.js"></script>
+<script src="app-assets/js/scripts/forms/validation/form-validation.js"></script>
+<script src="app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+<script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->

@@ -3,6 +3,13 @@
 <c:if test="${ (sessionScope.client == null) || (sessionScope.client.getLogin()!='admin@gmail.com')}">
     <c:redirect url="/index"/>
 </c:if>
+
+<c:set var="SuccessProduct" scope="session" value="${produitAdded}"/>
+<c:set var="FailedProduct" scope="session" value="${PfailedAdding}"/>
+<c:set var="DeletedProduct" scope="session" value="${DeletedProduct}"/>
+<c:set var="EditedProduct" scope="session" value="${produitUpdated}"/>
+<c:set var="ErrorUpdateProduct" scope="session" value="${PfailedEditing}"/>
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -27,9 +34,9 @@
      style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
     <div class="navbar-header expanded">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="html/ltr/vertical-menu-template/index.html">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
                 <div class="brand-logo"></div>
-                <h2 class="brand-text mb-0">Vuexy</h2>
+                <h2 class="brand-text mb-0">SDSI Shop</h2>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
                     class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
                     class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
@@ -55,15 +62,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Thumb View</h2>
+                        <h2 class="content-header-title float-left mb-0">Product List</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="">Products</a>
                                 </li>
-                                <li class="breadcrumb-item active">Thumb View
-                                </li>
+
                             </ol>
                         </div>
                     </div>
@@ -89,6 +95,65 @@
 
                     </div>
                 </div>
+                <c:if test="${SuccessProduct!=null}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${SuccessProduct}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="SuccessProduct"/>
+                </c:if>
+
+                <c:if test="${FailedProduct!=null}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${FailedProduct}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="FailedProduct"/>
+                </c:if>
+
+                <c:if test="${DeletedProduct!=null}">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${DeletedProduct}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="DeletedProduct"/>
+                </c:if>
+
+                <c:if test="${EditedProduct!=null}">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${EditedProduct}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="EditedProduct"/>
+                </c:if>
+
+                <c:if test="${ErrorUpdateProduct!=null}">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <p class="mb-0">
+                                ${ErrorUpdateProduct}
+                        </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                        </button>
+                    </div>
+                    <c:remove var="ErrorUpdateProduct"/>
+                </c:if>
                 <!-- dataTable starts -->
                 <div class="table-responsive">
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -157,7 +222,7 @@
                 <div class="add-new-data-sidebar">
                     <div class="overlay-bg"></div>
                     <div class="add-new-data">
-                        <form action="index" method="post">
+                        <form action="index" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="type" value="addProduit">
                         <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
                             <div>
@@ -262,7 +327,7 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <form action="index" method="post" class="form form-horizontal">
+                            <form action="index" method="post" class="form form-horizontal" enctype="multipart/form-data">
                                 <input hidden name="type" value="editProduit">
                                 <input hidden name="oldpid" id="moldpid" >
                             <div class="modal-body">

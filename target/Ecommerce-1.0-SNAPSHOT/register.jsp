@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
-
+<c:set var="ErrorRegister" scope="session" value="${failedRegister}"/>
+<c:set var="noMatchingMDP" scope="session" value="${registerNoMDP}"/>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,6 +72,29 @@
                                             <h4 class="mb-0">Create Account</h4>
                                         </div>
                                     </div>
+                                    <c:if test="${ErrorRegister!=null}">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${ErrorRegister}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="ErrorRegister"/>
+                                    </c:if>
+
+                                    <c:if test="${noMatchingMDP!=null}">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <p class="mb-0">
+                                                    ${noMatchingMDP}
+                                            </p>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                                            </button>
+                                        </div>
+                                        <c:remove var="noMatchingMDP"/>
+                                    </c:if>
                                     <p class="px-2">Fill the below form to create a new account.</p>
                                     <div class="card-content">
                                         <div class="card-body pt-0">
@@ -106,21 +130,7 @@
                                                            class="form-control" placeholder="Confirm Password" required>
                                                     <label for="inputConfPassword">Confirm Password</label>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="col-12">
-                                                        <fieldset class="checkbox">
-                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                <input type="checkbox" checked>
-                                                                <span class="vs-checkbox">
-                                                                    <span class="vs-checkbox--check">
-                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                    </span>
-                                                                </span>
-                                                                <span class=""> I accept the terms & conditions.</span>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
+
                                                 <a href="${pageContext.request.contextPath}/index?page=login"
                                                    class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
                                                 <button type="submit"

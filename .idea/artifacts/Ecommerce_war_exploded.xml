@@ -14,6 +14,7 @@
           <element id="module-output" name="Ecommerce" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.4" />
           <element id="library" level="project" name="Maven: org.mariadb.jdbc:mariadb-java-client:3.0.4" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2" />
           <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp.jstl:1.2.1" />
