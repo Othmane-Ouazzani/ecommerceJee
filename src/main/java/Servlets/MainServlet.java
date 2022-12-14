@@ -84,6 +84,10 @@ public class MainServlet extends HttpServlet {
                         request.getRequestDispatcher("gestionAchat.jsp").forward(request, response);
                         break;
                     }
+                    case "editUser":{
+                        request.getRequestDispatcher("editUser.jsp").forward(request, response);
+                        break;
+                    }
                     case "login": {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
@@ -227,6 +231,7 @@ public class MainServlet extends HttpServlet {
             case "deleteProduit":deleteProduit(request,response);break;
             case "addProduit":addProduit(request, response);break;
             case "editProduit":editProduit(request, response);break;
+            case "ueditClient":ueditClient(request, response);break;
             case "livrerCommande":livrerCommande(request, response);break;
             default:break;
         }
@@ -326,7 +331,7 @@ public class MainServlet extends HttpServlet {
         String num = request.getParameter("num");
         if (cm.isClientExist(email)==0) {
             if (password.equals(cpassword) && cm.getClient(email) == null) {
-                Client client = new Client(email, password, nom, prenom, num);
+                Client client = new Client(email, BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
                 cm.addClient(client);
                 ArrayList<Client> listeClient = cm.getAllClients();
                 request.setAttribute("listeClient",listeClient);
@@ -423,7 +428,8 @@ public class MainServlet extends HttpServlet {
     }
 
     private void editClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("im in edit client");
+        Client currentClient= (Client) request.getSession().getAttribute("client");
+        String currentEmail=currentClient.getLogin();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String cpassword = request.getParameter("cpassword");
@@ -434,17 +440,20 @@ public class MainServlet extends HttpServlet {
 
         if (cm.isClientExist(email)==0 || email.equals(oldLogin)) {
             if (password.equals(cpassword)) {
-                Client client = new Client(email, password, nom, prenom, num);
-                System.out.println("everything is good");
+                Client client = new Client(email,BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
                 cm.updateClient(client, oldLogin);
                 request.setAttribute("userEdited","User updated successfully");
                 ArrayList<Client> listeClient = cm.getAllClients();
                 request.setAttribute("listeClient",listeClient);
                 request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+
+
             }
         }else{
             request.setAttribute("failedUpdating","Email already exists!");
             request.getRequestDispatcher("gestionUser.jsp").forward(request, response);
+
+
         }
     }
 
@@ -592,5 +601,36 @@ public class MainServlet extends HttpServlet {
 
         return test;
     }
+
+
+
+    private void ueditClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Client currentClient= (Client) request.getSession().getAttribute("client");
+        String currentEmail=currentClient.getLogin();
+        String email = request.getParameter("uemail");
+        String password = request.getParameter("upassword");
+        String cpassword = request.getParameter("ucpassword");
+        String nom = request.getParameter("ulname");
+        String prenom = request.getParameter("ufname");
+        String num = request.getParameter("unum");
+        String oldLogin = request.getParameter("uoldLogin");
+
+        if (cm.isClientExist(email)==0 || email.equals(oldLogin)) {
+            if (password.equals(cpassword)) {
+                Client client = new Client(email,BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
+                cm.updateClient(client, oldLogin);
+                request.setAttribute("uuserEdited","User updated successfully");
+                ArrayList<Client> listeClient = cm.getAllClients();
+                request.setAttribute("listeClient",listeClient);
+                request.getRequestDispatcher("editUser.jsp").forward(request, response);
+
+            }
+        }else{
+                request.getRequestDispatcher("editUser.jsp").forward(request, response);
+        }
+    }
+
+
+
 
 }

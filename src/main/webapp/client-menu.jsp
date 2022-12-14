@@ -40,7 +40,11 @@
         <li class=""><a href="${pageContext.request.contextPath}/index?page=shop&category=tele"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Telephones</span></a>
         </li>
 
+
       </ul>
+    </li>
+    <li class="nav-item"><a href="${pageContext.request.contextPath}/index?page=editUser"><i class="feather icon-user"></i><span class="item" data-i18n="Dashboard">Edit profile</span><span
+            class="badge badge badge-warning badge-pill float-right mr-2"></span></a>
     </li>
   </ul>
   <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
