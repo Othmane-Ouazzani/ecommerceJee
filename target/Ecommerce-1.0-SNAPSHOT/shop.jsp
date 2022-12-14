@@ -156,7 +156,7 @@
                           <h1 class="font-large-2 my-1">No products found in this category</h1>
                           <p class="p-2">
                             The are no products in this category for the time being.Please consider coming back later and check again.
-                            
+
                           </p>
                           <a class="btn btn-primary btn-lg mt-2" href="index">Back to Home</a>
                         </div>

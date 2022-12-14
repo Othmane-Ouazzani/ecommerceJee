@@ -57,7 +57,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="index">
                 <div class="brand-logo"></div>
-                <h2 class="brand-text mb-0">Vuexy</h2></a>
+                <h2 class="brand-text mb-0">SDSI Shop</h2></a>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
                     class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i
                     class="toggle-icon icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather" data-ticon="icon-disc"></i></a></li>
@@ -66,7 +66,7 @@
         </ul>
     </div>
     <!--    <a href="index.html"><i class="feather icon-home"></i><span class="item" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>-->
-    <div class="shadow-bottom"></div>
+
 
 <%--    <%@ include file="client-menu.jsp" %>--%>
 
@@ -83,7 +83,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Welcome To VuexyShop</h2>
+                        <h2 class="content-header-title float-left mb-0">Welcome To SDSI Shop</h2>
                     </div>
                 </div>
             </div>
@@ -105,15 +105,11 @@
                                         <span class="navbar-toggler-icon d-block d-lg-none"><i class="feather icon-menu"></i></span>
                                     </button>
                                     <div class="search-results">
-                                        16285 results found
+
                                     </div>
                                 </div>
                                 <div class="view-options">
-                                    <select class="price-options form-control" id="ecommerce-price-options">
-                                        <option selected>Featured</option>
-                                        <option value="1">Lowest</option>
-                                        <option value="2">Highest</option>
-                                    </select>
+
                                     <div class="view-btn-option">
                                         <button class="btn btn-white view-btn grid-view-btn active">
                                             <i class="feather icon-grid"></i>
