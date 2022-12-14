@@ -564,7 +564,7 @@ public class MainServlet extends HttpServlet {
         //fetch form data
         Part part = request.getPart("pimage");
         String fileName = part.getSubmittedFileName();
-        String path ="C:\\Users\\othma\\OneDrive\\JEE\\IntelliJ\\Ecommerce\\src\\main\\webapp\\images\\"+fileName;
+        String path ="C:\\Users\\Len\\Desktop\\ecommerce\\src\\main\\webapp\\images\\"+fileName;
         InputStream is = part.getInputStream();
         boolean test = uploadFile(is, path);
         if (test) {
