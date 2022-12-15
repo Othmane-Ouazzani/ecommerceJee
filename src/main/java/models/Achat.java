@@ -1,7 +1,7 @@
 package models;
 
 public class Achat {
-
+//achat
     String produit;
     int commande;
     int qte;
