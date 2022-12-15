@@ -222,6 +222,7 @@ public class MainServlet extends HttpServlet {
 
 
         switch (type){
+            case "editProfile":ueditClient(request, response);break;
             case "submitAchat":submitAchat(request, response);break;
             case "register":register(request,response);break;
             case "login":login(request,response);break;
@@ -231,7 +232,6 @@ public class MainServlet extends HttpServlet {
             case "deleteProduit":deleteProduit(request,response);break;
             case "addProduit":addProduit(request, response);break;
             case "editProduit":editProduit(request, response);break;
-            case "ueditClient":ueditClient(request, response);break;
             case "livrerCommande":livrerCommande(request, response);break;
             default:break;
         }
@@ -614,16 +614,14 @@ public class MainServlet extends HttpServlet {
         String prenom = request.getParameter("ufname");
         String num = request.getParameter("unum");
         String oldLogin = request.getParameter("uoldLogin");
-
         if (cm.isClientExist(email)==0 || email.equals(oldLogin)) {
             if (password.equals(cpassword)) {
-                Client client = new Client(email,BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
-                cm.updateClient(client, oldLogin);
+                Client client = new Client(oldLogin,BCrypt.hashpw(password,BCrypt.gensalt()), nom, prenom, num);
+                System.out.println("in if"+password);
+                cm.editProfile(client);
                 request.setAttribute("uuserEdited","User updated successfully");
-                ArrayList<Client> listeClient = cm.getAllClients();
-                request.setAttribute("listeClient",listeClient);
+                request.getSession().setAttribute("client", client);
                 request.getRequestDispatcher("editUser.jsp").forward(request, response);
-
             }
         }else{
                 request.getRequestDispatcher("editUser.jsp").forward(request, response);

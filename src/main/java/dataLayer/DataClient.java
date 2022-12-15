@@ -94,6 +94,15 @@ public class DataClient {
         return  isUpdated;
     }
 
+    public int editProfile(Client c){
+        int isUpdated=0;
+        try {
+            connexion.Connect();
+            Statement st = connexion.getCnx().createStatement();
+            isUpdated=st.executeUpdate("UPDATE client SET nom = '"+c.getNom()+"',prenom = '"+c.getPrenom()+"',password = '"+c.getPassword()+"',tel = '"+c.getTel()+"' WHERE login ='"+c.getLogin()+"';");
+        }catch(SQLException e){e.printStackTrace();}
+        return  isUpdated;
+    }
 
 
 

@@ -20,5 +20,7 @@ public interface interfaceClient {
 
     public int updateClient(Client c,String oldLogin);
 
+    public int editProfile(Client c);
+
 }
 

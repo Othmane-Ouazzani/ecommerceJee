@@ -29,4 +29,9 @@ public class CommandeAchatManager implements interfaceCommandeAchat {
     public int livrerCommande(int commandeId) {
         return dca.livrerCommande(commandeId);
     }
+
+//    @Override
+//    public ArrayList<Commande> getCommandesByClient(String client) {
+//        return dca.getCommandeByClient(client);
+//    }
 }

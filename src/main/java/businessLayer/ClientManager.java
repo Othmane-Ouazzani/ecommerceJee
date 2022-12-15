@@ -41,4 +41,10 @@ public class ClientManager implements  interfaceClient{
         dc.updateClient(c, oldLogin);
         return  0;
     }
+
+    @Override
+    public int editProfile(Client c) {
+        dc.editProfile(c);
+        return 0;
+    }
 }

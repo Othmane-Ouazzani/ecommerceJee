@@ -116,7 +116,7 @@
                   </p>
                   <hr>
                   <hr>
-                  <p>Available - <span class="text-success">In stock</span></p>
+                  <p>Available - <span class="text-success">${produit.qte} In stock</span></p>
 
                   <div class="d-flex flex-column flex-sm-row">
                     <a href="${pageContext.request.contextPath}/index?cCategory=${produit.categorie}&cProduit=${produit.id}" class="btn btn-primary mr-0 mr-sm-1 mb-1 mb-sm-0"><i class="feather icon-shopping-cart mr-25"></i>ADD TO CART</a>

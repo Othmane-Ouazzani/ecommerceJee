@@ -19,4 +19,6 @@ public interface interfaceCommandeAchat {
 
     public int livrerCommande(int commandeId);
 
+//    public ArrayList<Commande> getCommandesByClient(String client);
+
 }

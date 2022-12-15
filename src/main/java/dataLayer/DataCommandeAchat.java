@@ -59,6 +59,23 @@ public class DataCommandeAchat {
         return listeAchat;
     }
 
+//    public ArrayList<Commande> getCommandeByClient(String client) {
+//        ArrayList<Commande> commandes=new ArrayList<Commande>();
+//        try{
+//            connexion.Connect();
+//            Statement st=connexion.getCnx().createStatement();
+//            ResultSet rs=st.executeQuery("SELECT *  FROM  commande WHERE client =  '"+client+"';");
+//            connexion.Deconnexion();
+//            while(rs.next()){
+//                commandes.add(new Commande(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), Integer.parseInt(rs.getString(4)), rs.getString(5), rs.getString(6), rs.getString(7)));
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//
+//        return commandes;
+//    }
+
     public int livrerCommande(int commandeId) {
         int isUpdated=0;
         try {
@@ -69,6 +86,7 @@ public class DataCommandeAchat {
 
         return  isUpdated;
     }
+
 
     public Card getCardInfos() {
         try{

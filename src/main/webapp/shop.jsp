@@ -201,6 +201,7 @@
                   </div>
                   <div class="item-name">
                     <a href="index?page=detail&prod=${produit.id}"><c:out value="${produit.nom}"/></a>
+                    <p class="text-success stock-status-in">${produit.qte} In Stock</p>
                   </div>
                   <div>
                     <p class="item-description">

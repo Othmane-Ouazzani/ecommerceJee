@@ -135,7 +135,6 @@
                                                             </div>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="text-right"><a href="#" class="card-link">Forgot Password?</a></div>
                                                 </div>
                                                 <a href="${pageContext.request.contextPath}/index?page=register" class="btn btn-outline-primary float-left btn-inline">Register</a>
                                                 <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>

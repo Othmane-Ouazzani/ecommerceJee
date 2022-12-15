@@ -4,6 +4,8 @@
     <c:redirect url="/index"/>
 </c:if>
 
+<c:set var="uuserEdited" scope="session" value="${uuserEdited}"/>
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -83,6 +85,17 @@
             </div>
         </div>
         <div class="content-detached content-right">
+            <c:if test="${uuserEdited!=null}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="mb-0">
+                            ${uuserEdited}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="feather icon-x-circle"></i></span>
+                    </button>
+                </div>
+                <c:remove var="uuserEdited"/>
+            </c:if>
             <div class="">
                 <!-- Ecommerce Content Section Starts -->
                 <section id="ecommerce-header" style="margin-bottom:3% ">
@@ -92,7 +105,7 @@
                 <!-- background Overlay when sidebar is shown  starts-->
 
                     <!-- BEGIN: Content-->
-                    <div class="app-content content">
+                    <div class="app-content content mx-1">
                         <div class="content-overlay"></div>
                         <div class="header-navbar-shadow"></div>
                         <div class="content-wrapper">
@@ -105,6 +118,7 @@
                                         <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account" aria-controls="account" role="tab" aria-selected="true">
                                             <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Account</span>
                                         </a>
+
                                     </li>
 
                                 </ul>
@@ -112,9 +126,9 @@
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
                                         <!-- users edit account form start -->
-                                        <form action="index" method="post" novalidate="">
-                                            <input type="hidden" name="type" value="ueditClient">
-                                            <input type="hidden" name="uoldLogin"  value="">
+                                        <form action="index" method="POST">
+                                            <input type="hidden" name="type" value="editProfile">
+                                            <input type="hidden" name="uoldLogin"  value="${sessionScope.client.getLogin()}">
                                             <div class="row">
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-group">
@@ -132,7 +146,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>E-mail</label>
-                                                            <input  type="email"  name="uemail" class="form-control" placeholder="Email" value="${sessionScope.client.getLogin()}" required="" data-validation-required-message="This email field is required">
+                                                            <input disabled="true"  type="email"  name="uemail" class="form-control" placeholder="Email" value="${sessionScope.client.getLogin()}" required="" data-validation-required-message="This email field is required">
                                                             <div class="help-block"></div></div>
                                                     </div>
                                                 </div>
@@ -147,7 +161,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                        <label>Password</label>
+                                                        <label>Password ( You must enter your old password to apply any changes! )</label>
                                                         <input  type="password"  name="upassword" class="form-control" placeholder="Phone number" value="${sessionScope.client.getPassword()}" required="" data-validation-required-message="Password is required">
                                                         <div class="help-block"></div></div>
                                                     </div>
